@@ -40,7 +40,7 @@ class OpenSmtInterpolatingProver extends OpenSmtAbstractProver<Integer>
         pFormulaCreator,
         pMgr,
         pShutdownNotifier,
-        getConfigInstance(pRandom, true, pAlgBool, pAlgUf, pAlgLra),
+        getConfig(pRandom, true, pAlgBool, pAlgUf, pAlgLra),
         pOptions);
   }
 

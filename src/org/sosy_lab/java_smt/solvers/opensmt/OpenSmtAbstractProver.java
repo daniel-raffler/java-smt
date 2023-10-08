@@ -67,7 +67,7 @@ public abstract class OpenSmtAbstractProver<T> extends AbstractProverWithAllSat<
     assertionStack.push(new ArrayList<>()); // create initial level
   }
 
-  protected static SMTConfig getConfigInstance(
+  protected static SMTConfig getConfig(
       int randomSeed, boolean interpolation, int algBool, int algUf, int algLra) {
     SMTConfig config = new SMTConfig();
     config.setRandomSeed(randomSeed);
