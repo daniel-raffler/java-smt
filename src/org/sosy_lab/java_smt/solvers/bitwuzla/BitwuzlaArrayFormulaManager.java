@@ -12,7 +12,6 @@ import org.sosy_lab.java_smt.api.Formula;
 import org.sosy_lab.java_smt.api.FormulaType;
 import org.sosy_lab.java_smt.api.FormulaType.ArrayFormulaType;
 import org.sosy_lab.java_smt.basicimpl.AbstractArrayFormulaManager;
-import org.sosy_lab.java_smt.solvers.bitwuzla.api.BitwuzlaNative;
 import org.sosy_lab.java_smt.solvers.bitwuzla.api.Kind;
 import org.sosy_lab.java_smt.solvers.bitwuzla.api.Sort;
 import org.sosy_lab.java_smt.solvers.bitwuzla.api.Term;
@@ -50,9 +49,7 @@ public class BitwuzlaArrayFormulaManager
 
   @Override
   protected <TI extends Formula, TE extends Formula> Term internalMakeArray(
-      FormulaType<TI> pIndexType,
-      FormulaType<TE> pElementType,
-      Term elseElem) {
+      FormulaType<TI> pIndexType, FormulaType<TE> pElementType, Term elseElem) {
     final ArrayFormulaType<TI, TE> arrayFormulaType =
         FormulaType.getArrayType(pIndexType, pElementType);
     final Sort bitwuzlaArrayType = toSolverType(arrayFormulaType);
