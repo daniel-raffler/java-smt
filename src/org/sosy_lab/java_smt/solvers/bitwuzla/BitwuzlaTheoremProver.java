@@ -92,7 +92,7 @@ class BitwuzlaTheoremProver extends AbstractProverWithAllSat<Void> implements Pr
 
   @Override
   public @Nullable Void addConstraintImpl(BooleanFormula constraint) throws InterruptedException {
-    wasLastSatCheckSat = false;
+    setChanged();
     env.assert_formula(((BitwuzlaBooleanFormula) constraint).getTerm());
     return null;
   }
@@ -126,7 +126,7 @@ class BitwuzlaTheoremProver extends AbstractProverWithAllSat<Void> implements Pr
   @Override
   public boolean isUnsat() throws SolverException, InterruptedException {
     Preconditions.checkState(!closed);
-    wasLastSatCheckSat = false;
+    setChanged();
     final Result result = env.check_sat(new Vector_Term(creator.getVariableCasts()));
     return readSATResult(result);
   }
@@ -141,7 +141,7 @@ class BitwuzlaTheoremProver extends AbstractProverWithAllSat<Void> implements Pr
   public boolean isUnsatWithAssumptions(Collection<BooleanFormula> assumptions)
       throws SolverException, InterruptedException {
     Preconditions.checkState(!closed);
-    wasLastSatCheckSat = false;
+    setChanged();
     Vector_Term ass = new Vector_Term(creator.getVariableCasts());
     for (BooleanFormula formula : assumptions) {
       BitwuzlaBooleanFormula bitwuzlaFormula = (BitwuzlaBooleanFormula) formula;
@@ -160,12 +160,19 @@ class BitwuzlaTheoremProver extends AbstractProverWithAllSat<Void> implements Pr
    * <p>A model might contain additional symbols with their evaluation, if a solver uses its own
    * temporary symbols. There should be at least a value-assignment for each free symbol.
    */
+  @SuppressWarnings("resource")
   @Override
   public Model getModel() throws SolverException {
     Preconditions.checkState(!closed);
     Preconditions.checkState(wasLastSatCheckSat, NO_MODEL_HELP);
     checkGenerateModels();
-    return new CachingModel(getEvaluatorWithoutChecks());
+    return new CachingModel(
+        registerEvaluator(
+            new BitwuzlaModel(
+                env,
+                this,
+                creator,
+                Collections2.transform(getAssertedFormulas(), creator::extractInfo))));
   }
 
   private List<BooleanFormula> getUnsatCore0() {
@@ -216,15 +223,28 @@ class BitwuzlaTheoremProver extends AbstractProverWithAllSat<Void> implements Pr
   public void close() {
     if (!closed) {
       closed = true;
+      closeAllEvaluators();
       env.delete();
     }
     super.close();
   }
 
+  protected void setChanged() {
+    if (!wasLastSatCheckSat) {
+      wasLastSatCheckSat = false;
+      closeAllEvaluators();
+    }
+  }
+
+  @SuppressWarnings("resource")
   @Override
   protected BitwuzlaModel getEvaluatorWithoutChecks() {
-    return new BitwuzlaModel(
-        env, this, creator, Collections2.transform(getAssertedFormulas(), creator::extractInfo));
+    return registerEvaluator(
+        new BitwuzlaModel(
+            env,
+            this,
+            creator,
+            Collections2.transform(getAssertedFormulas(), creator::extractInfo)));
   }
 
   public boolean isClosed() {
