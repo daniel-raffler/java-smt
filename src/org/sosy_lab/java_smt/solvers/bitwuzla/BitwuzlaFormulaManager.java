@@ -129,7 +129,11 @@ public final class BitwuzlaFormulaManager
     for (String token : tokens) {
       if (isDecl(token)) {
         Parser declParser = new Parser(creator.getTermManager(), bitwuzlaOption);
-        declParser.parse(token, true, false);
+        try {
+          declParser.parse(token, true, false);
+        } catch (IllegalArgumentException e) {
+          throw new IllegalArgumentException(e + "Token parsed: " + token);
+        }
         Term parsed = declParser.get_declared_funs().get(0);
 
         String symbol = parsed.symbol();
