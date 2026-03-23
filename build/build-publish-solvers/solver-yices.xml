@@ -346,7 +346,7 @@ SPDX-License-Identifier: Apache-2.0
               arch-attribute is not used.
             -->
             <copy todir="repository/${ivy.organisation}/${ivy.module}/">
-                <fileset dir="repository/${ivy.organisation}/${ivy.module}/x64/">
+                <fileset dir="repository/${ivy.organisation}/${ivy.module}/arm64/">
                     <include name="*-${yices2.version}.*"/>
                 </fileset>
             </copy>
