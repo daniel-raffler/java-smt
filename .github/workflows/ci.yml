@@ -58,6 +58,14 @@ jobs:
         arch: [arm64]
     runs-on: ${{ matrix.arch == 'arm64' && 'macos-latest' || 'macos-15-intel' }}
     steps:
+      - name: Install build dependencies
+        run: |
+          brew update
+          brew install gperf lcov autoconf automake libtool
+
+      - name: Build gmp
+        run: brew install gmp
+
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
@@ -78,8 +86,9 @@ jobs:
             ivy-shared-
           enableCrossOsArchive: true
 
-      - name: Install Ant
-        run: brew install ant
+      - name: Build Yices binaries
+        run: |
+          ant build-yices2-java-mac
 
       - name: Build dependencies
         run: ant build-dependencies
