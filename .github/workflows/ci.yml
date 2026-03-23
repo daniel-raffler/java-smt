@@ -98,8 +98,8 @@ jobs:
       #- name: Show dependencies
       #  run: otool -L downloads/yices2_java_bindings/dist/lib/libyices2java.dylib
 
-      - name: Build dependencies
-        run: ant build-dependencies
+      - name: Publish Yices binaries
+        run: ant publish-yices2 -Dyices2.version=2.8.0-prerelease
 
       - name: Build project
         run: ant build
