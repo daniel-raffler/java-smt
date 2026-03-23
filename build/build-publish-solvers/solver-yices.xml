@@ -296,7 +296,7 @@ SPDX-License-Identifier: Apache-2.0
         </exec>
     </target>
     <target name="build-yices2-java-mac"
-            depends="build-yices2-mac, download-jdk21-windows, download-yices2-java"
+            depends="build-yices2-mac, download-yices2-java"
             unless="yices-java.installed">
         <exec executable="git" dir="${yices2.buildDir}/yices2_java_bindings" failonerror="true">
             <arg value="apply"/>
