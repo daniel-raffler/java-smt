@@ -88,7 +88,9 @@ jobs:
 
       - name: Add local Ivy repo
         run: |
-          mkdir repository
+          mkdir -p repository/org.sosy_lab/java-smt
+          mkdir -p repository/org.sosy_lab/javasmt-solver-yices2
+          mkdir -p repository/org.sosy_lab/javasmt-yices2
 
       #- name: Build Yices binaries
       #  run: |
