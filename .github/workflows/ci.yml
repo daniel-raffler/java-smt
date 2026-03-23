@@ -86,12 +86,17 @@ jobs:
             ivy-shared-
           enableCrossOsArchive: true
 
+      - name: Add local Ivy repo
+        run: |
+          mkdir repository
+          echo "ivy.repo.url=file://${user.dir}/repository" >> build.properties
+
       - name: Build Yices binaries
         run: |
           ant build-yices2-java-mac
 
-      - name: Check dependencies
-        run: otool -L downloads/yices2_java_bindings/dist/lib/libyices2java.dylib
+      #- name: Show dependencies
+      #  run: otool -L downloads/yices2_java_bindings/dist/lib/libyices2java.dylib
 
       - name: Build dependencies
         run: ant build-dependencies

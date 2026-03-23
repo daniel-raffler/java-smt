@@ -19,10 +19,16 @@ SPDX-License-Identifier: Apache-2.0
     <property name="repo.dir" value="${basedir}/repository"/>
     <resolvers>
         <!-- Resolver for downloading dependencies -->
-        <url name="Sosy-Lab" descriptor="required">
-            <ivy pattern="${ivy.repo.url}/[organisation]/[module]/ivy-[revision].xml" />
-            <artifact pattern="${ivy.repo.url}/[organisation]/[module]/([arch]/)[artifact]-[revision](-[classifier]).[ext]" />
-        </url>
+        <chain name="Sosy-Lab" descriptor="required">
+            <url name="online">
+                <ivy pattern="${ivy.repo.url}/[organisation]/[module]/ivy-[revision].xml" />
+                <artifact pattern="${ivy.repo.url}/[organisation]/[module]/([arch]/)[artifact]-[revision](-[classifier]).[ext]" />
+            </url>
+            <filesystem name="local">
+                <ivy pattern="${repo.dir}/[organisation]/[module]/ivy-[revision].xml" />
+                <artifact pattern="${repo.dir}/[organisation]/[module]/([arch]/)[artifact]-[revision](-[classifier]).[ext]" />
+            </filesystem>
+        </chain>
 
         <!-- Resolver for publishing this project -->
         <filesystem name="Sosy-Lab-Publish">
