@@ -91,7 +91,7 @@ jobs:
           ant build-yices2-java-mac
 
       - name: Check dependencies
-        run: otool -L downloads/yices2_java_bindings/dist/lib/libyices.dylib
+        run: otool -L downloads/yices2_java_bindings/dist/lib/libyices2java.dylib
 
       - name: Build dependencies
         run: ant build-dependencies
