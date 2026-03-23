@@ -49,7 +49,7 @@ diff --git a/src/main/java/com/sri/yices/Makefile b/src/main/java/com/sri/yices/
  
  libyices2java.dylib: yicesJNI.o
 -	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -dynamiclib -o $@ yicesJNI.o $(LIBS)
-+	$(CXX) $(CFLAGS) $(LDFLAGS) -o $@ yicesJNI.o -dynamiclib -Wl,-soname,$(libyices2java) /Users/runner/work/java-smt/java-smt/downloads/yices2/install/arm64-macos/lib/libyices.a /Users/runner/work/java-smt/java-smt/downloads/cudd/install/arm64-macos/lib/libcudd.a /Users/runner/work/java-smt/java-smt/downloads/libpoly/install/arm64-macos/lib/libpoly.a /opt/homebrew/lib/gmpxx.a /opt/homebrew/lib/gmp.a -lc -lm -Wl,--version-script=libyices2java.version
++	$(CXX) $(CFLAGS) $(LDFLAGS) -o $@ yicesJNI.o -dynamiclib -Wl,-soname,$(libyices2java) /Users/runner/work/java-smt/java-smt/downloads/yices2/install/arm64-macos/lib/libyices.a /Users/runner/work/java-smt/java-smt/downloads/cudd/install/arm64-macos/lib/libcudd.a /Users/runner/work/java-smt/java-smt/downloads/libpoly/install/arm64-macos/lib/libpoly.a /opt/homebrew/lib/libgmpxx.a /opt/homebrew/lib/libgmp.a -lc -lm -Wl,--version-script=libyices2java.version
  
  libyices2java.so: yicesJNI.o
 -	$(CXX) $(CFLAGS) $(LDFLAGS) -shared -o $@ yicesJNI.o $(LIBS)
