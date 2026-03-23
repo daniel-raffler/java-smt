@@ -305,12 +305,12 @@ SPDX-License-Identifier: Apache-2.0
         <mkdir dir="${yices2.buildDir}/yices2_java_bindings/dist/lib"/>
         <!-- macOS build -->
         <exec executable="ant" dir="${yices2.buildDir}/yices2_java_bindings" failonerror="true">
-            <env key="OS" value="linux"/>
+            <env key="OS" value="darwin"/>
             <env key="JNI_PATH" value="${java.home}/include"/>
             <env key="GMP_PATH" value="/opt/homebrew"/>
-            <env key="CUDD_PATH" value="${yices2.buildDir}/cudd/install/macos-linux"/>
-            <env key="POLY_PATH" value="${yices2.buildDir}/libpoly/install/macos-linux"/>
-            <env key="YICES_PATH" value="${yices2.buildDir}/yices2/install/macos-linux"/>
+            <env key="CUDD_PATH" value="${yices2.buildDir}/cudd/install/arm64-macos"/>
+            <env key="POLY_PATH" value="${yices2.buildDir}/libpoly/install/arm64-macos"/>
+            <env key="YICES_PATH" value="${yices2.buildDir}/yices2/install/arm64-macos"/>
             <arg value="install"/>
         </exec>
     </target>
