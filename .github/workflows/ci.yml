@@ -9,10 +9,7 @@
 name: CI
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  push
 
 env:
   # Use a project-local relative directory for the Ivy cache to make it easy to share across platforms.
