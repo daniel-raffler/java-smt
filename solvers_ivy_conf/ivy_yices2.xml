@@ -35,7 +35,7 @@ SPDX-License-Identifier: Apache-2.0
     </configurations>
 
     <publications defaultconf="solver-yices2">
-        <artifact name="libyices2java" conf="solver-yices2-macos-arm64" e:arch="arm64" type="shared-object" ext="dylib"/>
+        <artifact name="libyices2java" conf="solver-yices2-macos-arm64" e:arch="arm64" type="dylib" ext="dylib"/>
         <artifact name="yices" conf="solver-yices2-common" ext="jar"/>
     </publications>
 

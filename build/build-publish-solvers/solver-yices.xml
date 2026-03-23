@@ -332,9 +332,7 @@ SPDX-License-Identifier: Apache-2.0
                 Please specify the Yices2 version with the flag -Dyices2.version=... .
             </fail>
 
-            <copy file="${yices2.buildDir}/yices2_java_bindings/dist/lib/libyices2java.dylib"
-                  tofile="${yices2.distDir}/arm64/libyices2java-${yices2.version}.dylib"
-                  failonerror="true"/>
+            <copy file="${yices2.buildDir}/yices2_java_bindings/dist/lib/libyices2java.dylib" tofile="${yices2.distDir}/arm64/libyices2java-${yices2.version}.dylib" failonerror="true"/>
             <copy file="${yices2.buildDir}/yices2_java_bindings/dist/lib/yices.jar" tofile="${yices2.distDir}/yices-${yices2.version}.jar" failonerror="true"/>
 
             <ivy:resolve conf="solver-yices2" file="solvers_ivy_conf/ivy_yices2.xml" />
@@ -348,7 +346,7 @@ SPDX-License-Identifier: Apache-2.0
               arch-attribute is not used.
             -->
             <copy todir="repository/${ivy.organisation}/${ivy.module}/">
-                <fileset dir="repository/${ivy.organisation}/${ivy.module}/arm64/">
+                <fileset dir="repository/${ivy.organisation}/${ivy.module}/x64/">
                     <include name="*-${yices2.version}.*"/>
                 </fileset>
             </copy>
