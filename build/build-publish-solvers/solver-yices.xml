@@ -153,6 +153,8 @@ SPDX-License-Identifier: Apache-2.0
             <arg value=".."/>
             <arg value="-DCMAKE_BUILD_TYPE=Release"/>
             <arg value="-DCMAKE_INSTALL_PREFIX=${yices2.buildDir}/libpoly/install/arm64-macos"/>
+            <arg value="-DGMP_INCLUDE_DIR=/opt/homebrew/include"/>
+            <arg value="-DGMP_LIBRARY=/opt/homebrew/lib/libgmp.a"/>
             <arg value="-DLIBPOLY_BUILD_PYTHON_API=OFF"/>
         </exec>
         <exec executable="make" dir="${yices2.buildDir}/libpoly/build" failonerror="true">
@@ -225,8 +227,8 @@ SPDX-License-Identifier: Apache-2.0
         <mkdir dir="${yices2.buildDir}/yices2/install"/>
         <!-- macOS build -->
         <exec executable="./configure" dir="${yices2.buildDir}/yices2" failonerror="true">
-            <env key="LDFLAGS" value="-L${yices2.buildDir}/libpoly/install/x64-linux/lib -L${yices2.buildDir}/cudd/install/x64-linux/lib"/>
-            <env key="CFLAGS" value="-I${yices2.buildDir}/libpoly/install/x64-linux/include -I${yices2.buildDir}/cudd/install/x64-linux/include"/>
+            <env key="LDFLAGS" value="-L/opt/homebrew/lib -L${yices2.buildDir}/libpoly/install/arm64-macos/lib -L${yices2.buildDir}/cudd/install/arm64-macos/lib"/>
+            <env key="CFLAGS" value="-I/opt/homebrew/include -I${yices2.buildDir}/libpoly/install/arm64-macos/include -I${yices2.buildDir}/cudd/install/arm64-macos/include"/>
             <arg value="--enable-mcsat"/>
             <arg value="--enable-thread-safety"/>
             <arg value="--prefix=${yices2.buildDir}/yices2/install/arm64-macos"/>
