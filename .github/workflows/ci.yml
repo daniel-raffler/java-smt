@@ -92,15 +92,11 @@ jobs:
           mkdir -p repository/org.sosy_lab/javasmt-solver-yices2
           mkdir -p repository/org.sosy_lab/javasmt-yices2
 
-      #- name: Build Yices binaries
-      #  run: |
-      #    ant build-yices2-java-mac
+      - name: Build Yices binaries
+        run: ant publish-yices2 -Dyices2.version=2.8.0-prerelease -Dyices.module="javasmt-yices2" -Dyices.version="yices2.8-prerelease" -Dyices.configuration="runtime-yices2->runtime; contrib->sources"
 
       #- name: Show dependencies
       #  run: otool -L downloads/yices2_java_bindings/dist/lib/libyices2java.dylib
-
-      - name: Build Yices binaries
-        run: ant publish-yices2 -Dyices2.version=2.8.0-prerelease -Dyices.module="javasmt-yices2" -Dyices.version="yices2.8-prerelease" -Dyices.configuration="runtime-yices2->runtime; contrib->sources"
 
       - name: Build project
         run: |
