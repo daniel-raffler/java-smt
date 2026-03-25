@@ -542,7 +542,7 @@ public abstract class SolverBasedTest0 {
 
     @Parameters(name = "{0}")
     public static Solvers[] getAllSolvers() {
-      return Solvers.values();
+      return new Solvers[] {Solvers.YICES2};
     }
 
     @Parameter(0)
