@@ -1,7 +1,19 @@
+Index: build.xml
+diff --git a/build.xml b/build.xml
+--- a/build.xml	(revision 25b03e1858b3ef006bca2532b87510613d8af55f)
++++ b/build.xml	(date 1773730694637)
+@@ -224,7 +224,6 @@
+     <exec executable="make"
+           dir="${code}"
+           failonerror="true">
+-      <arg line="${library}"/>
+     </exec>
+
+   </target>
 Index: src/main/java/com/sri/yices/Makefile
 diff --git a/src/main/java/com/sri/yices/Makefile b/src/main/java/com/sri/yices/Makefile
---- a/src/main/java/com/sri/yices/Makefile	(revision 0f92154e9f517de638e5717e3de3d36343c2a8a5)
-+++ b/src/main/java/com/sri/yices/Makefile	(date 1774440361187)
+--- a/src/main/java/com/sri/yices/Makefile	(revision 25b03e1858b3ef006bca2532b87510613d8af55f)
++++ b/src/main/java/com/sri/yices/Makefile	(date 1773727210451)
 @@ -31,7 +31,9 @@
  ifeq ($(OS),darwin)
   EXTENSION=dylib
@@ -70,23 +82,12 @@ diff --git a/src/main/java/com/sri/yices/Makefile b/src/main/java/com/sri/yices/
  
 -.PHONY: all clean install install-linux install-darwin 
 +.PHONY: all clean install install-linux install-darwin install-win32
-Index: build.xml
-diff --git a/build.xml b/build.xml
---- a/build.xml	(revision 0f92154e9f517de638e5717e3de3d36343c2a8a5)
-+++ b/build.xml	(date 1774440086260)
-@@ -224,7 +224,6 @@
-     <exec executable="make"
-           dir="${code}"
-           failonerror="true">
--      <arg line="${library}"/>
-     </exec>
- 
-   </target>
+
 Index: src/main/java/com/sri/yices/libyices2java.version
 diff --git a/src/main/java/com/sri/yices/libyices2java.version b/src/main/java/com/sri/yices/libyices2java.version
 new file mode 100644
---- /dev/null	(date 1774262441433)
-+++ b/src/main/java/com/sri/yices/libyices2java.version	(date 1774262441433)
+--- /dev/null	(date 1773662010549)
++++ b/src/main/java/com/sri/yices/libyices2java.version	(date 1773662010549)
 @@ -0,0 +1,4 @@
 +YICES2JAVA {
 +  global: Java_*;
