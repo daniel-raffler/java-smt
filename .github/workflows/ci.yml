@@ -46,7 +46,7 @@ jobs:
           sudo apt-get install -y ant
 
       - name: Download Dependencies
-        run: ant build-dependencies -Dyices2.version=2.8.0-prerelease -Dyices.module="javasmt-yices2" -Dyices.version="5.0.1-722-g90a66d7fa" -Dyices.configuration="runtime-yices2->runtime; contrib->sources"
+        run: ant build-dependencies
 
   macos:
     name: macOS (${{ matrix.arch }}, Java ${{ matrix.java-version }})
@@ -55,7 +55,7 @@ jobs:
       fail-fast: false
       matrix:
         java-version: [21]
-        arch: [arm64]
+        arch: [x64, arm64]
     runs-on: ${{ matrix.arch == 'arm64' && 'macos-latest' || 'macos-15-intel' }}
     steps:
       - name: Install build dependencies
@@ -93,7 +93,7 @@ jobs:
         run: ant build
 
       - name: Build Yices binaries for macOS
-        run: ant publish-yices2-macos -Dyices2.version=2.8.0-prerelease
+        run: ant publish-yices2-macOS -Dyices2.version=2.8.0-prerelease
 
       #- name: Show dependencies
       #  run: otool -L downloads/yices2_java_bindings/dist/lib/libyices2java.dylib
