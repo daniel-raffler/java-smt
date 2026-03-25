@@ -335,8 +335,11 @@ SPDX-License-Identifier: Apache-2.0
 
     <target name="publish-yices2-macOS" depends="load-ivy, build-yices2-java-macOS"
             description="Compile Yices2 binaries for macOS">
+        <condition property="install.architecture" value="arm64" else="x86_64">
+            <os arch="aarch64"/>
+        </condition>
         <mkdir dir="lib/native/${build.architecture}-macosx"/>
-        <copy file="${yices2.buildDir}/yices2_java_bindings/dist/lib/libyices2java.dylib" tofile="lib/native/${build.architecture}-macosx/libyices2java.dylib" failonerror="true"/>
+        <copy file="${yices2.buildDir}/yices2_java_bindings/dist/lib/libyices2java.dylib" tofile="lib/native/${install.architecture}-macosx/libyices2java.dylib" failonerror="true"/>
     </target>
 
     <target name="publish-yices2" depends="load-ivy, build-yices2-java"
