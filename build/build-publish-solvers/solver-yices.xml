@@ -54,6 +54,9 @@ SPDX-License-Identifier: Apache-2.0
         <condition property="build.architecture" value="arm64" else="x64">
             <os arch="aarch64"/>
         </condition>
+        <condition property="build.homebrew" value="/opt/homebrew" else="/usr/local">
+            <os arch="aarch64"/>
+        </condition>
     </target>
 
     <target name="download-cudd" depends="build-initialize" unless="cudd.downloaded">
@@ -157,8 +160,8 @@ SPDX-License-Identifier: Apache-2.0
             <arg value=".."/>
             <arg value="-DCMAKE_BUILD_TYPE=Release"/>
             <arg value="-DCMAKE_INSTALL_PREFIX=${yices2.buildDir}/libpoly/install/${build.architecture}-macos"/>
-            <arg value="-DGMP_INCLUDE_DIR=/opt/homebrew/include"/>
-            <arg value="-DGMP_LIBRARY=/opt/homebrew/lib/libgmp.a"/>
+            <arg value="-DGMP_INCLUDE_DIR=${build.homebrew}/include"/>
+            <arg value="-DGMP_LIBRARY=${build.homebrew}/lib/libgmp.a"/>
             <arg value="-DLIBPOLY_BUILD_PYTHON_API=OFF"/>
         </exec>
         <exec executable="make" dir="${yices2.buildDir}/libpoly/build" failonerror="true">
@@ -232,8 +235,8 @@ SPDX-License-Identifier: Apache-2.0
         <mkdir dir="${yices2.buildDir}/yices2/install"/>
         <!-- macOS build -->
         <exec executable="./configure" dir="${yices2.buildDir}/yices2" failonerror="true">
-            <env key="LDFLAGS" value="-L/opt/homebrew/lib -L${yices2.buildDir}/libpoly/install/${build.architecture}-macos/lib -L${yices2.buildDir}/cudd/install/${build.architecture}-macos/lib"/>
-            <env key="CFLAGS" value="-I/opt/homebrew/include -I${yices2.buildDir}/libpoly/install/${build.architecture}-macos/include -I${yices2.buildDir}/cudd/install/${build.architecture}-macos/include"/>
+            <env key="LDFLAGS" value="-L${build.homebrew}/lib -L${yices2.buildDir}/libpoly/install/${build.architecture}-macos/lib -L${yices2.buildDir}/cudd/install/${build.architecture}-macos/lib"/>
+            <env key="CFLAGS" value="-I${build.homebrew}/include -I${yices2.buildDir}/libpoly/install/${build.architecture}-macos/include -I${yices2.buildDir}/cudd/install/${build.architecture}-macos/include"/>
             <arg value="--enable-mcsat"/>
             <arg value="--enable-thread-safety"/>
             <arg value="--prefix=${yices2.buildDir}/yices2/install/${build.architecture}-macos"/>
@@ -312,7 +315,7 @@ SPDX-License-Identifier: Apache-2.0
         <exec executable="ant" dir="${yices2.buildDir}/yices2_java_bindings" failonerror="true">
             <env key="OS" value="darwin"/>
             <env key="JNI_PATH" value="${java.home}/include"/>
-            <env key="GMP_PATH" value="/opt/homebrew"/>
+            <env key="GMP_PATH" value="${build.homebrew}"/>
             <env key="CUDD_PATH" value="${yices2.buildDir}/cudd/install/${build.architecture}-macos"/>
             <env key="POLY_PATH" value="${yices2.buildDir}/libpoly/install/${build.architecture}-macos"/>
             <env key="YICES_PATH" value="${yices2.buildDir}/yices2/install/${build.architecture}-macos"/>
