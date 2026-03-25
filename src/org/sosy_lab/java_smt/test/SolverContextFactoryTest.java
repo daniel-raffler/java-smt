@@ -160,19 +160,19 @@ public class SolverContextFactoryTest {
   private String[] getRequiredLibcxx(String library) {
     switch (library) {
       case "z3":
-        return new String[]{"GLIBC_2.34", "GLIBCXX_3.4.26", "GLIBCXX_3.4.29"};
+        return new String[] {"GLIBC_2.34", "GLIBCXX_3.4.26", "GLIBCXX_3.4.29"};
       case "bitwuzlaj":
-        return new String[]{"GLIBC_2.33", "GLIBCXX_3.4.26", "GLIBCXX_3.4.29"};
+        return new String[] {"GLIBC_2.33", "GLIBCXX_3.4.26", "GLIBCXX_3.4.29"};
       case "opensmtj":
-        return new String[]{"GLIBC_2.33", "GLIBCXX_3.4.26", "GLIBCXX_3.4.29"};
+        return new String[] {"GLIBC_2.33", "GLIBCXX_3.4.26", "GLIBCXX_3.4.29"};
       case "mathsat5j":
-        return new String[]{"GLIBC_2.33", "GLIBC_2.38"};
+        return new String[] {"GLIBC_2.33", "GLIBC_2.38"};
       case "cvc5jni":
-        return new String[]{"GLIBC_2.32"};
+        return new String[] {"GLIBC_2.32"};
       case "yices2java":
-        return new String[]{"GLIBC_2.34"};
+        return new String[] {"GLIBC_2.34"};
       default:
-        return new String[]{};
+        return new String[] {};
     }
   }
 
@@ -225,9 +225,7 @@ public class SolverContextFactoryTest {
     }
   }
 
-  /**
-   * Check whether each solver reports a nice and readable version string.
-   */
+  /** Check whether each solver reports a nice and readable version string. */
   private void checkVersion(SolverContext pContext) {
     String solverName = solverToUse().toString();
     if (solverToUse() == Solvers.YICES2) {
@@ -249,9 +247,7 @@ public class SolverContextFactoryTest {
         .matches(versionPattern);
   }
 
-  /**
-   * Negative test for failing to load native library.
-   */
+  /** Negative test for failing to load native library. */
   @Test
   public void testFailToLoadNativeLibraryWithInvalidOperatingSystem()
       throws InvalidConfigurationException {
