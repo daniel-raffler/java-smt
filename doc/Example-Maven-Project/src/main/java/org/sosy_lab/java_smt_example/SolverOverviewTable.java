@@ -30,7 +30,7 @@ public class SolverOverviewTable {
         new org.sosy_lab.java_smt.example.SolverOverviewTable();
     final List<SolverInfo> infos = new ArrayList<>();
     for (Solvers s : Solvers.values()) {
-      if (s != Solvers.MATHSAT5) {
+      if (s != Solvers.MATHSAT5 &&  s != Solvers.CVC4) {
         infos.add(infoProvider.getSolverInformation(s));
       }
     }

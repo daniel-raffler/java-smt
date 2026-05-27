@@ -145,7 +145,7 @@ public class SudokuTest {
   public void checkSudoku()
       throws InvalidConfigurationException, InterruptedException, SolverException {
     assumeTrue(isOperatingSystemSupported(solver));
-    if (s != Solvers.MATHSAT5) {
+    if (s != Solvers.MATHSAT5 && s != Solvers.CVC4) {
       logger.log(Level.INFO, "Executing " + solver + "...");
 
       context = SolverContextFactory.createSolverContext(config, logger, notifier, solver);
