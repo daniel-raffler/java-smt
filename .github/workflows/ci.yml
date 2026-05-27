@@ -56,6 +56,13 @@ jobs:
           cd doc/Example-Maven-Project
           mvn test
 
+      - name: Upload error log
+        uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          path: doc/Example-Maven-Project/hs*
+          archive: false
+
   kotlin:
     name: Kotlin
     strategy:
