@@ -12,35 +12,8 @@ on:
   push
 
 jobs:
-  dependencies:
-    name: Download Dependencies
-    runs-on: ubuntu-latest
-    steps:
-      - name: Shared Ivy Cache
-        uses: actions/cache@v5
-        with:
-          path: ~/.ivy2
-          # We use a unique key for each run to ensure the cache is updated if needed,
-          # while restoring from the most recent "ivy-shared-" cache.
-          key: ivy-shared-${{ github.run_id }}
-          restore-keys: |
-            ivy-shared-
-          enableCrossOsArchive: true
-
-      - name: Shared Maven Cache
-        uses: actions/cache@v5
-        with:
-          path: ~/.m2/repository
-          # We use a unique key for each run to ensure the cache is updated if needed,
-          # while restoring from the most recent "ivy-shared-" cache.
-          key: maven-shared-${{ github.run_id }}
-          restore-keys: |
-            maven-shared-
-          enableCrossOsArchive: true
-
   maven:
     name: Maven
-    needs: dependencies
     strategy:
       fail-fast: false
       matrix:
@@ -56,6 +29,17 @@ jobs:
           java-version: ${{ matrix.java-version }}
           distribution: 'temurin'
           architecture: ${{ matrix.arch }}
+
+      - name: Shared Maven Cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.m2/repository
+          # We use a unique key for each run to ensure the cache is updated if needed,
+          # while restoring from the most recent "ivy-shared-" cache.
+          key: maven-shared-${{ github.run_id }}
+          restore-keys: |
+            maven-shared-
+          enableCrossOsArchive: true
 
       - name: Build Maven example project
         run: |
@@ -81,7 +65,6 @@ jobs:
 
   macos:
     name: macOS (${{ matrix.arch }}, Java ${{ matrix.java-version }})
-    needs: dependencies
     strategy:
       fail-fast: false
       matrix:
@@ -97,6 +80,17 @@ jobs:
           java-version: ${{ matrix.java-version }}
           distribution: 'temurin'
           architecture: ${{ matrix.arch }}
+
+      - name: Shared Ivy Cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.ivy2
+          # We use a unique key for each run to ensure the cache is updated if needed,
+          # while restoring from the most recent "ivy-shared-" cache.
+          key: ivy-shared-${{ github.run_id }}
+          restore-keys: |
+            ivy-shared-
+          enableCrossOsArchive: true
 
       - name: Build Ivy project
         run: |
@@ -115,7 +109,6 @@ jobs:
 
   kotlin:
     name: Kotlin
-    needs: dependencies
     strategy:
       fail-fast: false
       matrix:
@@ -131,6 +124,17 @@ jobs:
           java-version: ${{ matrix.java-version }}
           distribution: 'temurin'
           architecture: ${{ matrix.arch }}
+
+      - name: Shared Maven Cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.m2/repository
+          # We use a unique key for each run to ensure the cache is updated if needed,
+          # while restoring from the most recent "ivy-shared-" cache.
+          key: maven-shared-${{ github.run_id }}
+          restore-keys: |
+            maven-shared-
+          enableCrossOsArchive: true
 
       - name: Install Gradle wrapper
         run: |
@@ -154,7 +158,6 @@ jobs:
 
   ivy:
     name: Ivy
-    needs: dependencies
     strategy:
       fail-fast: false
       matrix:
@@ -171,10 +174,16 @@ jobs:
           distribution: 'temurin'
           architecture: ${{ matrix.arch }}
 
-      - name: Install Ant
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ant
+      - name: Shared Ivy Cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.ivy2
+          # We use a unique key for each run to ensure the cache is updated if needed,
+          # while restoring from the most recent "ivy-shared-" cache.
+          key: ivy-shared-${{ github.run_id }}
+          restore-keys: |
+            ivy-shared-
+          enableCrossOsArchive: true
 
       - name: Build Ivy project
         run: |
