@@ -10,25 +10,20 @@ package org.sosy_lab.java_smt_example;
 
 import org.sosy_lab.common.ShutdownNotifier;
 import org.sosy_lab.common.configuration.Configuration;
-import org.sosy_lab.common.configuration.InvalidConfigurationException;
 import org.sosy_lab.common.log.LogManager;
 import org.sosy_lab.java_smt.SolverContextFactory;
 import org.sosy_lab.java_smt.SolverContextFactory.Solvers;
 import org.sosy_lab.java_smt.api.SolverContext;
 
 public class SolverOverviewTable {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     Configuration config = Configuration.defaultConfiguration();
     LogManager logger = LogManager.createNullLogManager();
     ShutdownNotifier notifier = ShutdownNotifier.createDummy();
 
-    for (Solvers solver : Solvers.values()) {
-      try (SolverContext context =
-               SolverContextFactory.createSolverContext(config, logger, notifier, solver)) {
-        System.out.println(solver + ", " + context.getVersion());
-      } catch (InvalidConfigurationException e) {
-        System.out.println(solver + " not available: " + e.getMessage());
-      }
+    try (SolverContext context =
+        SolverContextFactory.createSolverContext(config, logger, notifier, Solvers.Z3)) {
+      System.out.println("cvc5" + ", " + context.getVersion());
     }
   }
 }
