@@ -30,10 +30,7 @@ public class SolverOverviewTable {
         new org.sosy_lab.java_smt.example.SolverOverviewTable();
     final List<SolverInfo> infos = new ArrayList<>();
     for (Solvers s : Solvers.values()) {
-      if (s != Solvers.MATHSAT5 &&  s != Solvers.CVC4 && s != Solvers.CVC5) {
-        System.out.println(s);
-        infos.add(infoProvider.getSolverInformation(s));
-      }
+      infos.add(infoProvider.getSolverInformation(s));
     }
 
     infos.sort(Comparator.comparing(SolverInfo::getName)); // alphabetical ordering
