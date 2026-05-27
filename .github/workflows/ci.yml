@@ -44,14 +44,14 @@ jobs:
       - name: Build Maven example project
         run: |
           cd doc/Example-Maven-Project
-          mvn compile
-
-      - name: Run tests
-        run: |
-          cd doc/Example-Maven-Project
-          mvn test
+          mvn -DskipTests compile
 
       - name: Show solver table
         run: |
           cd doc/Example-Maven-Project
           mvn exec:exec
+
+      - name: Run tests
+        run: |
+          cd doc/Example-Maven-Project
+          mvn test
