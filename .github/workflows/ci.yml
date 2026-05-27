@@ -17,8 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java-version: [ 17, 21, 25 ]
-        distribution: [ 'zulu', 'temurin', 'oracle' ]
+        java-version: [ 21 ]
         arch: [ x64 ]
     runs-on: ubuntu-latest
     steps:
@@ -39,7 +38,7 @@ jobs:
         uses: actions/setup-java@v5
         with:
           java-version: ${{ matrix.java-version }}
-          distribution: ${{ matrix.distribution }}
+          distribution: 'temurin'
           architecture: ${{ matrix.arch }}
 
       - name: Build Maven example project
