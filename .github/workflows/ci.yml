@@ -97,9 +97,6 @@ jobs:
           cd doc/Example-Ivy-Project
           ant compile
 
-      - name: Print binary folder
-        run: ls doc/Example-Ivy-Project/lib/native/arm64-macos
-
       - name: Show solver table
         run: |
           cd doc/Example-Ivy-Project
