@@ -72,7 +72,7 @@ jobs:
         with:
           path: ~/.m2/repository
           # We use a unique key for each run to ensure the cache is updated if needed,
-          # while restoring from the most recent "ivy-shared-" cache.
+          # while restoring from the most recent "maven-shared-" cache.
           key: maven-shared-${{ github.run_id }}
           restore-keys: |
             maven-shared-
@@ -104,3 +104,47 @@ jobs:
         run: |
           cd doc/Example-Gradle-Project-Kotlin
           ./gradlew test
+
+  ivy:
+    name: Ivy
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version: [ 21 ]
+        arch: [ x64 ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Shared Ivy Cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.ivy2/repository
+          # We use a unique key for each run to ensure the cache is updated if needed,
+          # while restoring from the most recent "ivy-shared-" cache.
+          key: ivy-shared-${{ github.run_id }}
+          restore-keys: |
+            ivy-shared-
+          enableCrossOsArchive: true
+
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v5
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: 'temurin'
+          architecture: ${{ matrix.arch }}
+
+      - name: Build Ivy project
+        run: |
+          cd doc/Example-Ivy-Project
+          ant compile
+
+      - name: Show solver table
+        run: |
+          cd doc/Example-Ivy-Project
+          ant run
+
+      - name: Run tests
+        run: |
+          cd doc/Example-Ivy-Project
+          ant test
