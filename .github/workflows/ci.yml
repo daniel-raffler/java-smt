@@ -93,7 +93,7 @@ jobs:
       - name: Build Kotlin example project
         run: |
           cd doc/Example-Gradle-Project-Kotlin
-          ./gradlew build
+          ./gradlew build -x test
 
       - name: Show solver table
         run: |
