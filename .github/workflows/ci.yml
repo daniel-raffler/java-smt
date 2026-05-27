@@ -11,46 +11,9 @@ name: CI
 on:
   push
 
-env:
-  # Use a project-local relative directory for the Ivy cache to make it easy to share across platforms.
-  # We place it inside the workspace so it's identical for Linux, macOS, and Windows.
-  IVY_CACHE_DIR: .ivy2-cache
-
 jobs:
-  dependencies:
-    name: Download Dependencies
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v5
-        with:
-          java-version: 17
-          distribution: 'temurin'
-
-      - name: Shared Ivy Cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.IVY_CACHE_DIR }}
-          # We use a unique key for each run to ensure the cache is updated if needed,
-          # while restoring from the most recent "ivy-shared-" cache.
-          key: ivy-shared-${{ github.run_id }}
-          restore-keys: |
-            ivy-shared-
-          enableCrossOsArchive: true
-
-      - name: Install Ant
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ant
-
-      - name: Download Dependencies
-        run: ant build-dependencies
-
   maven:
     name: Maven
-    needs: dependencies
     strategy:
       fail-fast: false
       matrix:
@@ -59,6 +22,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+
+      - name: Shared Maven Cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.m2/repository
+          # We use a unique key for each run to ensure the cache is updated if needed,
+          # while restoring from the most recent "ivy-shared-" cache.
+          key: maven-shared-${{ github.run_id }}
+          restore-keys: |
+            maven-shared-
+          enableCrossOsArchive: true
 
       - name: Set up JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v5
