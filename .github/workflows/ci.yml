@@ -162,7 +162,7 @@ jobs:
       fail-fast: false
       matrix:
         java-version: [ 21 ]
-        arch: [ x64 ]
+        arch: [ x64, arm64 ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
