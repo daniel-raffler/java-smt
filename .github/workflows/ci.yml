@@ -201,8 +201,8 @@ jobs:
           cd doc/Example-Gradle-Project-Kotlin
           ./gradlew test
 
-  ivy:
-    name: Ivy
+  linux:
+    name: Linux
     strategy:
       fail-fast: false
       matrix:
