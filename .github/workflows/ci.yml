@@ -43,8 +43,8 @@ jobs:
 
       - name: Use gcc 14
         run: |          
-          update-alternatives --install /usr/bin/gcc gcc /usr/bin/g++-14 10
-          update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 10
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/g++-14 10
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 10
 
       - name: Print C++ runtime version
         run: |        
