@@ -30,10 +30,12 @@ public class SolverOverviewTable {
         new org.sosy_lab.java_smt.example.SolverOverviewTable();
     final List<SolverInfo> infos = new ArrayList<>();
     for (Solvers s : Solvers.values()) {
-      try {
-        infos.add(infoProvider.getSolverInformation(s));
-      } catch (Exception e) {
-        // Ignore
+      if (s == Solvers.CVC5) {
+        try {
+          infos.add(infoProvider.getSolverInformation(s));
+        } catch (Exception e) {
+          // Ignore
+        }
       }
     }
 
