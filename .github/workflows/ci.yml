@@ -72,7 +72,8 @@ jobs:
       - name: Show solver table
         run: |
           cd doc/Example-Ivy-Project
-          ant run
+          ant package
+          java -jar javasmt-ivy-example.jar 
 
       - name: Run tests
         run: |
