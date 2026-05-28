@@ -50,6 +50,8 @@ jobs:
         run: |        
           g++ --version
           gcc --version
+          apt-cache show libstdc++6
+          apt-cache show libgcc-s1
 
       - name: Build Ivy project
         run: |
