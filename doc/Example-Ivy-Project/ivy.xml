@@ -18,13 +18,7 @@ SPDX-License-Identifier: Apache-2.0
 
     <dependencies>
         <!-- JavaSMT -->
-        <dependency org="org.sosy_lab" name="java-smt" rev="6.0.0-148-gba08f432a" conf="runtime->runtime-x64,runtime-arm64">
-            <exclude org="org.sosy_lab" module="javasmt-solver-optimathsat"/>
-            <exclude org="org.sosy_lab" module="javasmt-solver-mathsat"/>
-            <exclude org="org.sosy_lab" module="javasmt-solver-cvc4"/>
-        </dependency>
-        <dependency org="org.sosy_lab" name="javasmt-solver-mathsat" rev="5.6.11" conf="runtime->solver-mathsat" />
-        <dependency org="org.sosy_lab" name="javasmt-solver-cvc4" rev="1.8-prerelease-2020-06-24-g7825d8f28" conf="runtime->solver-cvc4" />
+        <dependency org="org.sosy_lab" name="java-smt" rev="6.0.0-148-gba08f432a" conf="runtime->runtime-x64,runtime-arm64"/>
 
         <!-- JUnit6 -->
         <dependency org="org.junit.jupiter" name="junit-jupiter-api" rev="6.1.0" conf="test->default"/>
