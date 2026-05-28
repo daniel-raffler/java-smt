@@ -185,7 +185,7 @@ public class SudokuTest {
       case BITWUZLA -> (IS_LINUX && isSufficientVersionOfLibcxx("bitwuzlaj")) || (IS_WINDOWS && !IS_ARCH_ARM64);
       case MATHSAT5 -> (IS_LINUX && isSufficientVersionOfLibcxx("mathsat5j")) || (IS_WINDOWS && !IS_ARCH_ARM64);
       case Z3 -> (IS_LINUX && isSufficientVersionOfLibcxx("z3")) || IS_WINDOWS || IS_MAC;
-      case Z3_WITH_INTERPOLATION -> IS_LINUX;
+      case Z3_WITH_INTERPOLATION -> IS_LINUX && !IS_ARCH_ARM64;
     };
   }
 
