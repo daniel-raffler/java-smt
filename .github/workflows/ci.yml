@@ -53,6 +53,10 @@ jobs:
           apt-cache show libstdc++6
           apt-cache show libgcc-s1
           /lib/x86_64-linux-gnu/libc.so.6
+          sha256sum /lib/x86_64-linux-gnu/libstdc++.so.6
+          sha256sum /lib/x86_64-linux-gnu/libm.so.6
+          sha256sum /lib/x86_64-linux-gnu/libgcc_s.so.1
+          sha256sum /lib/x86_64-linux-gnu/libc.so.6
 
       - name: Build Ivy project
         run: |
