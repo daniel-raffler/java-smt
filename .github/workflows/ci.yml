@@ -58,6 +58,12 @@ jobs:
           cd doc/Example-Ivy-Project
           ant compile
 
+      - name: Show CVC5 dependencies
+        run: |
+          cd doc/Example-Ivy-Project/lib/native/x86_64-linux
+          ldd -v libcvc5jni.so
+          sha256sum libcvc5jni.so
+
       - name: Show solver table
         run: |
           cd doc/Example-Ivy-Project
