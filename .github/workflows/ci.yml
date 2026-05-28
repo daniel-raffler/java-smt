@@ -41,6 +41,14 @@ jobs:
             ivy-shared-
           enableCrossOsArchive: true
 
+      - name: Use US locale
+        run: |
+          sudo apt-get update
+          DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC sudo apt-get install -y tzdata locales locales-all
+          LC_ALL=en_US.UTF-8
+          LANG=en_US.UTF-8
+          LANGUAGE=en_US.UTF-8
+
       - name: Use gcc 14
         run: |          
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/g++-14 10
