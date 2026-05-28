@@ -19,7 +19,7 @@ jobs:
       matrix:
         java-version: [ 21 ]
         arch: [ x64, arm64 ]
-    runs-on: ${{ matrix.arch == 'arm64' && 'ubuntu-24.04-arm' || 'ubuntu-22.04' }}
+    runs-on: ${{ matrix.arch == 'arm64' && 'ubuntu-24.04-arm' || 'ubuntu-24.04' }}
     steps:
       - uses: actions/checkout@v6
 
@@ -41,18 +41,8 @@ jobs:
             ivy-shared-
           enableCrossOsArchive: true
 
-      - name: Install gcc 14
+      - name: Use gcc 14
         run: |
-          sudo apt update
-          sudo apt install -y software-properties-common
-          sudo add-apt-repository --yes --no-update universe
-          sudo apt update
-          apt-cache policy neovim
-          sudo apt install gcc-14 g++-14
-          ll /usr/bin/gcc-14
-          ll /usr/bin/g++-14
-          sudo update-alternatives --display gcc
-          ll /etc/alternatives/g*
           sudo update-alternatives --remove-all gcc
           sudo update-alternatives --remove-all g++
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/g++-14 10
