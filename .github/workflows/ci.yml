@@ -41,6 +41,14 @@ jobs:
             ivy-shared-
           enableCrossOsArchive: true
 
+      - name: Update C++ runtime
+        run: |
+          sudo apt-get update
+          sudo apt-get install libstdc++6
+
+      - name: Print C++ runtime version
+        run: ls /usr/lib/x86_64-linux-gnu/libstdc++.so.6*
+
       - name: Build Ivy project
         run: |
           cd doc/Example-Ivy-Project
