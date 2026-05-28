@@ -193,18 +193,17 @@ public class SudokuTest {
   public void checkSudoku()
           throws InvalidConfigurationException, InterruptedException, SolverException {
     assumeTrue(isSupportedOperatingSystemAndArchitecture(solver));
-    if (solver == Solvers.CVC5) {
-      logger.log(Level.INFO, "Executing " + solver + "...");
 
-      context = SolverContextFactory.createSolverContext(config, logger, notifier, solver);
-      Integer[][] grid = readGridFromString(input);
+    logger.log(Level.INFO, "Executing " + solver + "...");
 
-      SudokuSolver<?> sudoku = new Sudoku.BooleanBasedSudokuSolver(context);
-      Integer[][] solution = sudoku.solve(grid);
+    context = SolverContextFactory.createSolverContext(config, logger, notifier, solver);
+    Integer[][] grid = readGridFromString(input);
 
-      assertNotNull(solution);
-      assertEquals(sudokuSolution, solutionToString(solution));
-    }
+    SudokuSolver<?> sudoku = new Sudoku.BooleanBasedSudokuSolver(context);
+    Integer[][] solution = sudoku.solve(grid);
+
+    assertNotNull(solution);
+    assertEquals(sudokuSolution, solutionToString(solution));
   }
 
   private String solutionToString(Integer[][] solution) {
