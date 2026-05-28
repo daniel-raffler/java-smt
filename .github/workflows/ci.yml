@@ -60,6 +60,7 @@ jobs:
 
       - name: Build Ivy project
         run: |
+          export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64/
           cd doc/Example-Ivy-Project
           ant compile
 
@@ -71,12 +72,14 @@ jobs:
 
       - name: Show solver table
         run: |
+          export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64/
           cd doc/Example-Ivy-Project
           ant package
           java -jar javasmt-ivy-example.jar 
 
       - name: Run tests
         run: |
+          export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64/
           cd doc/Example-Ivy-Project
           ant test
 
