@@ -41,13 +41,28 @@ jobs:
             ivy-shared-
           enableCrossOsArchive: true
 
-      - name: Update C++ runtime
+      - name: Install gcc 14
         run: |
-          sudo apt-get update
-          sudo apt-get install libstdc++6
+          sudo apt update
+          sudo apt install -y software-properties-common
+          sudo add-apt-repository --yes --no-update universe
+          sudo apt update
+          apt-cache policy neovim
+          sudo apt install gcc-14 g++-14
+          ll /usr/bin/gcc-14
+          ll /usr/bin/g++-14
+          sudo update-alternatives --display gcc
+          ll /etc/alternatives/g*
+          sudo update-alternatives --remove-all gcc
+          sudo update-alternatives --remove-all g++
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/g++-14 10
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 10
 
       - name: Print C++ runtime version
-        run: ls /usr/lib/x86_64-linux-gnu/libstdc++.so.6*
+        run: |        
+          g++ --version
+          gcc --version
+          ls /usr/lib/x86_64-linux-gnu/libstdc++.so.6*
 
       - name: Build Ivy project
         run: |
