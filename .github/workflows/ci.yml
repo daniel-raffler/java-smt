@@ -26,6 +26,7 @@ jobs:
       - name: Set up JDK ${{ matrix.java-version }}
         run: |
           sudo apt install openjdk-21-jdk ant
+          sudo update-alternatives --list java
           sudo update-alternatives --set java /usr/lib/jvm/java-21-openjdk-amd64/bin/java
 
       - name: Shared Ivy Cache
