@@ -64,3 +64,56 @@ jobs:
         with:
           path: doc/Example-Ivy-Project/build/test-report/html/junit-noframes.html
           archive: false
+
+  maven:
+    name: Maven Example Project
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version: [ 21 ]
+        os: [ubuntu-24.04, ubuntu-24.04-arm, windows-2025, windows-11-arm, macos-26-intel, macos-26]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v5
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: 'temurin'
+
+      - name: Shared Maven Cache
+        uses: actions/cache@v5
+        with:
+          path: $HOME/.m2/repository
+          # We use a unique key for each run to ensure the cache is updated if needed,
+          # while restoring from the most recent "ivy-shared-" cache.
+          key: maven-shared-${{ github.run_id }}
+          restore-keys: |
+            maven-shared-
+          enableCrossOsArchive: true
+
+      - name: Build Maven example project
+        run: |
+          cd doc/Example-Maven-Project
+          mvn -DskipTests compile
+
+      - name: Show solver table
+        run: |
+          cd doc/Example-Maven-Project
+          mvn exec:exec
+        env:
+          LD_PRELOAD: /usr/lib/${{ matrix.os == 'ubuntu-24.04-arm' && 'aarch64-linux-gnu' || 'x86_64-linux-gnu' }}/libstdc++.so.6
+
+      - name: Run tests
+        run: |
+          cd doc/Example-Maven-Project
+          mvn surefire-report:report
+        env:
+          LD_PRELOAD: /usr/lib/${{ matrix.os == 'ubuntu-24.04-arm' && 'aarch64-linux-gnu' || 'x86_64-linux-gnu' }}/libstdc++.so.6
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v7
+        with:
+          path: doc/Example-Maven-Project/target/reports/surefire.html
+          archive: false
