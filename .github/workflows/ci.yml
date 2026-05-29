@@ -135,7 +135,6 @@ jobs:
         java-version: [ 21 ]
         os: [ ubuntu-24.04, ubuntu-24.04-arm, windows-2025, windows-11-arm, macos-26-intel, macos-26 ]
     runs-on: ${{ matrix.os }}
-    if: false
     steps:
       - uses: actions/checkout@v6
 
