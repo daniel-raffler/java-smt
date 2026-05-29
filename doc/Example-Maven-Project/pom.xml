@@ -72,9 +72,6 @@ SPDX-License-Identifier: Apache-2.0
         <project.dependency.path>${project.build.directory}/${project.dependency.relativepath}
         </project.dependency.path>
 
-        <!-- Some solvers are provided for more than x64, e.g., also for arm64. -->
-        <system.arch>x64</system.arch>
-
         <!-- JavaSMT release version -->
         <!-- See https://central.sonatype.com/artifact/org.sosy-lab/java-smt for the latest version -->
         <javasmt.version>6.0.0-148-gba08f432a</javasmt.version>
@@ -214,6 +211,7 @@ SPDX-License-Identifier: Apache-2.0
 
     <profiles>
         <profile>
+            <id>x64-linux</id>
             <activation>
                 <os>
                     <family>linux</family>
@@ -226,7 +224,7 @@ SPDX-License-Identifier: Apache-2.0
                     <groupId>org.sosy-lab</groupId>
                     <artifactId>javasmt-solver-mathsat</artifactId>
                     <version>${mathsat.version}</version>
-                    <classifier>libmathsat5j-${system.arch}</classifier>
+                    <classifier>libmathsat5j-x64</classifier>
                     <type>so</type>
                 </dependency>
 
@@ -236,14 +234,14 @@ SPDX-License-Identifier: Apache-2.0
                     <artifactId>javasmt-solver-z3</artifactId>
                     <version>${z3.version}</version>
                     <type>so</type>
-                    <classifier>libz3-${system.arch}</classifier>
+                    <classifier>libz3-x64</classifier>
                 </dependency>
                 <dependency>
                     <groupId>org.sosy-lab</groupId>
                     <artifactId>javasmt-solver-z3</artifactId>
                     <version>${z3.version}</version>
                     <type>so</type>
-                    <classifier>libz3java-${system.arch}</classifier>
+                    <classifier>libz3java-x64</classifier>
                 </dependency>
 
                 <!-- Z3-Legacy -->
@@ -252,14 +250,14 @@ SPDX-License-Identifier: Apache-2.0
                     <artifactId>javasmt-solver-z3-legacy</artifactId>
                     <version>${z3-legacy.version}</version>
                     <type>so</type>
-                    <classifier>libz3legacy-${system.arch}</classifier>
+                    <classifier>libz3legacy-x64</classifier>
                 </dependency>
                 <dependency>
                     <groupId>org.sosy-lab</groupId>
                     <artifactId>javasmt-solver-z3-legacy</artifactId>
                     <version>${z3-legacy.version}</version>
                     <type>so</type>
-                    <classifier>libz3javalegacy-${system.arch}</classifier>
+                    <classifier>libz3javalegacy-x64</classifier>
                 </dependency>
 
                 <!-- Bitwuzla -->
@@ -268,7 +266,7 @@ SPDX-License-Identifier: Apache-2.0
                     <artifactId>javasmt-solver-bitwuzla</artifactId>
                     <version>${bitwuzla.version}</version>
                     <type>so</type>
-                    <classifier>libbitwuzlaj-${system.arch}</classifier>
+                    <classifier>libbitwuzlaj-x64</classifier>
                 </dependency>
 
                 <!-- Boolector -->
@@ -323,7 +321,7 @@ SPDX-License-Identifier: Apache-2.0
                     <artifactId>javasmt-solver-cvc5</artifactId>
                     <version>${cvc5.version}</version>
                     <type>so</type>
-                    <classifier>libcvc5jni-${system.arch}</classifier>
+                    <classifier>libcvc5jni-x64</classifier>
                 </dependency>
 
                 <!-- Yices2 -->
@@ -332,7 +330,7 @@ SPDX-License-Identifier: Apache-2.0
                     <artifactId>javasmt-solver-yices2</artifactId>
                     <version>${yices.version}</version>
                     <type>so</type>
-                    <classifier>libyices2java-${system.arch}</classifier>
+                    <classifier>libyices2java-x64</classifier>
                 </dependency>
 
                 <!-- OpenSMT -->
@@ -341,7 +339,7 @@ SPDX-License-Identifier: Apache-2.0
                     <artifactId>javasmt-solver-opensmt</artifactId>
                     <version>${opensmt.version}</version>
                     <type>so</type>
-                    <classifier>libopensmtj-${system.arch}</classifier>
+                    <classifier>libopensmtj-x64</classifier>
                 </dependency>
             </dependencies>
         </profile>
@@ -448,10 +446,10 @@ SPDX-License-Identifier: Apache-2.0
                                     <!-- example mapping: from javasmt-solver-z3-libz3java-x64.so to libz3.so, version got already removed above.
                                          "\1" is the library name, "\2" is the file extension. -->
                                     <regexpmapper
-                                            from="^javasmt-solver-(?:bitwuzla|boolector|cvc4|cvc5|mathsat|opensmt|yices2|z3-legacy|z3)-(.*?)(?:-${system.arch})?\.(so|dll|dylib)$"
+                                            from="^javasmt-solver-(?:bitwuzla|boolector|cvc4|cvc5|mathsat|opensmt|yices2|z3-legacy|z3)-(.*?)(?:-arm64|-x64)?\.(so|dll|dylib)$"
                                             to="\1.\2"/>
                                 </copy>
-                                <delete dir="${project.build.directory}/temp-natives"/>
+                                <!--<delete dir="${project.build.directory}/temp-natives"/>-->
                             </target>
                         </configuration>
                     </execution>
