@@ -61,7 +61,6 @@ jobs:
 
       - name: Upload error log
         uses: actions/upload-artifact@v7
-        if: always()
         with:
-          name: error-logs
-          path: doc/Example-Ivy-Project/hs*
+          path: build/test-report/html/junit-noframes.html
+          archive: false
