@@ -226,6 +226,26 @@ configurations {
     }
 }
 
+fun shorten(full: String) : String {
+    val regex = """(.*)(?:-x64|-arm64)\.(so|dll|dylib)$""".toRegex()
+    val matchResult = regex.find(full)
+    var clipped = ""
+    if (matchResult != null) {
+        val (prefix, suffix) = matchResult.destructured
+        clipped = "$prefix.$suffix"
+    } else {
+        clipped = full
+    }
+    val regex2 = """.*-(.*).(so|dll|dylib)$""".toRegex()
+    val matchResult2 = regex2.find(clipped)
+    if (matchResult2 != null) {
+        val (libname, suffix) = matchResult2.destructured
+        return "$libname.$suffix"
+    } else {
+        return clipped
+    }
+}
+
 // JavaSMT needs the solver dependencies in a particular folder structure; in the same folder as JavaSMT is the easiest.
 // Also we need to rename some solver dependencies.
 // Clean, then copy all JavaSMT components into the build/dependencies folder, rename and use it from there
@@ -233,7 +253,7 @@ tasks.register<Copy>("copyDependencies") {
     dependsOn("cleanDownloadedDependencies")
     from(configurations["javaSMTConfig"])
     into("build/dependencies")
-    rename(".*(lib[^-]*)-?.*.so", "\$1.so")
+    rename(::shorten)
 }
 
 // Cleanup task for the JavaSMT components/dependencies
