@@ -129,6 +129,68 @@ SPDX-License-Identifier: Apache-2.0
             <version>${ostrich.version}</version>
         </dependency>
 
+        <!-- Z3 -->
+        <dependency>
+            <groupId>org.sosy-lab</groupId>
+            <artifactId>javasmt-solver-z3</artifactId>
+            <version>${z3.version}</version>
+        </dependency>
+
+        <!-- Z3-Legacy -->
+        <dependency>
+            <groupId>org.sosy-lab</groupId>
+            <artifactId>javasmt-solver-z3-legacy</artifactId>
+            <version>${z3-legacy.version}</version>
+            <classifier>com.microsoft.z3legacy</classifier>
+        </dependency>
+
+        <!-- Bitwuzla -->
+        <dependency>
+            <groupId>org.sosy-lab</groupId>
+            <artifactId>javasmt-solver-bitwuzla</artifactId>
+            <version>${bitwuzla.version}</version>
+        </dependency>
+
+        <!-- CVC4 -->
+        <dependency>
+            <groupId>org.sosy-lab</groupId>
+            <artifactId>javasmt-solver-cvc4</artifactId>
+            <version>${cvc4.version}</version>
+            <classifier>CVC4</classifier>
+        </dependency>
+
+        <!-- CVC5 -->
+        <dependency>
+            <groupId>org.sosy-lab</groupId>
+            <artifactId>javasmt-solver-cvc5</artifactId>
+            <version>${cvc5.version}</version>
+        </dependency>
+
+        <!-- Yices2 -->
+        <dependency>
+            <groupId>org.sosy-lab</groupId>
+            <artifactId>javasmt-yices2</artifactId>
+            <version>${javasmt-yices.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.sosy-lab</groupId>
+                    <artifactId>javasmt-solver-yices2</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.sosy-lab</groupId>
+            <artifactId>javasmt-solver-yices2</artifactId>
+            <version>${yices.version}</version>
+        </dependency>
+
+        <!-- OpenSMT -->
+        <dependency>
+            <groupId>org.sosy-lab</groupId>
+            <artifactId>javasmt-solver-opensmt</artifactId>
+            <version>${opensmt.version}</version>
+        </dependency>
+
         <!-- JUnit for testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -173,11 +235,6 @@ SPDX-License-Identifier: Apache-2.0
                     <groupId>org.sosy-lab</groupId>
                     <artifactId>javasmt-solver-z3</artifactId>
                     <version>${z3.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.sosy-lab</groupId>
-                    <artifactId>javasmt-solver-z3</artifactId>
-                    <version>${z3.version}</version>
                     <type>so</type>
                     <classifier>libz3-${system.arch}</classifier>
                 </dependency>
@@ -194,12 +251,6 @@ SPDX-License-Identifier: Apache-2.0
                     <groupId>org.sosy-lab</groupId>
                     <artifactId>javasmt-solver-z3-legacy</artifactId>
                     <version>${z3-legacy.version}</version>
-                    <classifier>com.microsoft.z3legacy</classifier>
-                </dependency>
-                <dependency>
-                    <groupId>org.sosy-lab</groupId>
-                    <artifactId>javasmt-solver-z3-legacy</artifactId>
-                    <version>${z3-legacy.version}</version>
                     <type>so</type>
                     <classifier>libz3legacy-${system.arch}</classifier>
                 </dependency>
@@ -212,11 +263,6 @@ SPDX-License-Identifier: Apache-2.0
                 </dependency>
 
                 <!-- Bitwuzla -->
-                <dependency>
-                    <groupId>org.sosy-lab</groupId>
-                    <artifactId>javasmt-solver-bitwuzla</artifactId>
-                    <version>${bitwuzla.version}</version>
-                </dependency>
                 <dependency>
                     <groupId>org.sosy-lab</groupId>
                     <artifactId>javasmt-solver-bitwuzla</artifactId>
@@ -253,12 +299,6 @@ SPDX-License-Identifier: Apache-2.0
                     <groupId>org.sosy-lab</groupId>
                     <artifactId>javasmt-solver-cvc4</artifactId>
                     <version>${cvc4.version}</version>
-                    <classifier>CVC4</classifier>
-                </dependency>
-                <dependency>
-                    <groupId>org.sosy-lab</groupId>
-                    <artifactId>javasmt-solver-cvc4</artifactId>
-                    <version>${cvc4.version}</version>
                     <type>so</type>
                     <classifier>libcvc4</classifier>
                 </dependency>
@@ -282,32 +322,11 @@ SPDX-License-Identifier: Apache-2.0
                     <groupId>org.sosy-lab</groupId>
                     <artifactId>javasmt-solver-cvc5</artifactId>
                     <version>${cvc5.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.sosy-lab</groupId>
-                    <artifactId>javasmt-solver-cvc5</artifactId>
-                    <version>${cvc5.version}</version>
                     <type>so</type>
                     <classifier>libcvc5jni-${system.arch}</classifier>
                 </dependency>
 
                 <!-- Yices2 -->
-                <dependency>
-                    <groupId>org.sosy-lab</groupId>
-                    <artifactId>javasmt-yices2</artifactId>
-                    <version>${javasmt-yices.version}</version>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>org.sosy-lab</groupId>
-                            <artifactId>javasmt-solver-yices2</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <dependency>
-                    <groupId>org.sosy-lab</groupId>
-                    <artifactId>javasmt-solver-yices2</artifactId>
-                    <version>${yices.version}</version>
-                </dependency>
                 <dependency>
                     <groupId>org.sosy-lab</groupId>
                     <artifactId>javasmt-solver-yices2</artifactId>
@@ -317,11 +336,6 @@ SPDX-License-Identifier: Apache-2.0
                 </dependency>
 
                 <!-- OpenSMT -->
-                <dependency>
-                    <groupId>org.sosy-lab</groupId>
-                    <artifactId>javasmt-solver-opensmt</artifactId>
-                    <version>${opensmt.version}</version>
-                </dependency>
                 <dependency>
                     <groupId>org.sosy-lab</groupId>
                     <artifactId>javasmt-solver-opensmt</artifactId>
