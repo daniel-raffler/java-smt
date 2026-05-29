@@ -30,11 +30,7 @@ public class SolverOverviewTable {
         new org.sosy_lab.java_smt.example.SolverOverviewTable();
     final List<SolverInfo> infos = new ArrayList<>();
     for (Solvers s : Solvers.values()) {
-      try {
         infos.add(infoProvider.getSolverInformation(s));
-      } catch (Exception e) {
-        // Ignore
-      }
     }
 
     infos.sort(Comparator.comparing(SolverInfo::getName)); // alphabetical ordering
