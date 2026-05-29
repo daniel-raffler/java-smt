@@ -42,7 +42,7 @@ val smtInterpolVersion = "2.5-1242-g5c50fb6d"
 val princessVersion = "2025-11-17"
 val ostrichVersion = "2.0"
 val yices2Version = "2.7.0-gdc5687ca"
-val z3Version = "4.16.0"
+val z3Version = "4.15.0"
 val z3LegacyVersion = "4.5.0-gd57a2a6dc"
 
 val junit6Version = "6.1.0"
