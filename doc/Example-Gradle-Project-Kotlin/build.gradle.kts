@@ -116,6 +116,7 @@ dependencies {
     // OpenSMT
     runtimeOnly("org.sosy-lab:javasmt-solver-opensmt:$opensmtVersion@jar")
 
+    println("os=$os, arch=$arch")
     when {
         os.isLinux() && arch.isAmd64() -> {
             // Mathsat5
@@ -175,6 +176,7 @@ dependencies {
         }
 
         os.isMacOsX() && arch.isAmd64() -> {
+            println("x64-macosx")
             // Z3
             runtimeOnly("org.sosy-lab:javasmt-solver-z3:$z3Version:libz3-x64@dylib")
             runtimeOnly("org.sosy-lab:javasmt-solver-z3:$z3Version:libz3java-x64@dylib")
@@ -184,6 +186,7 @@ dependencies {
         }
 
         os.isMacOsX() && arch.isArm64() -> {
+            println("arm64-macosx")
             // Z3
             runtimeOnly("org.sosy-lab:javasmt-solver-z3:$z3Version:libz3-arm64@dylib")
             runtimeOnly("org.sosy-lab:javasmt-solver-z3:$z3Version:libz3java-arm64@dylib")
