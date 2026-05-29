@@ -48,13 +48,16 @@ jobs:
       - name: Show solver table
         run: |
           cd doc/Example-Ivy-Project
-          ant package
-          java -jar javasmt-ivy-example.jar 
+          ant run
+        env:
+          LD_PRELOAD: /usr/lib/${{ matrix.arch == 'arm64' && 'aarch64-linux-gnu' || 'x86_64-linux-gnu' }}/libstdc++.so.6
 
       - name: Run tests
         run: |
           cd doc/Example-Ivy-Project
           ant test
+        env:
+          LD_PRELOAD: /usr/lib/${{ matrix.arch == 'arm64' && 'aarch64-linux-gnu' || 'x86_64-linux-gnu' }}/libstdc++.so.6
 
       - name: Upload error log
         uses: actions/upload-artifact@v7
