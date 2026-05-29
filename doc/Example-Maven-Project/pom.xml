@@ -477,7 +477,7 @@ SPDX-License-Identifier: Apache-2.0
                     <artifactId>javasmt-solver-yices2</artifactId>
                     <version>${yices.version}</version>
                     <type>dll</type>
-                    <classifier>libyices2java-x64</classifier>
+                    <classifier>yices2java-x64</classifier>
                 </dependency>
             </dependencies>
         </profile>
