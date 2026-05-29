@@ -75,8 +75,7 @@ SPDX-License-Identifier: Apache-2.0
         <!-- JavaSMT release version -->
         <!-- See https://central.sonatype.com/artifact/org.sosy-lab/java-smt for the latest version -->
         <javasmt.version>6.0.0-148-gba08f432a</javasmt.version>
-        <javasmt-yices.version>6.0.0-141-g04134287c
-        </javasmt-yices.version> <!-- Shipped separately as Yices is under GPL-->
+        <javasmt-yices.version>6.0.0-141-g04134287c</javasmt-yices.version> <!-- Shipped separately as Yices is under GPL-->
 
         <!-- Solver versions -->
         <!-- Solver versions are fixed for each JavaSMT release and should be taken from the JavaSMT POM file above. In some
