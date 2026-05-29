@@ -174,6 +174,24 @@ dependencies {
             runtimeOnly("org.sosy-lab:javasmt-solver-opensmt:$opensmtVersion:libopensmtj-arm64@so")
         }
 
+        os.isMacOsX() && arch.isAmd64() -> {
+            // Z3
+            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$z3Version:libz3-x64@dylib")
+            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$z3Version:libz3java-x64@dylib")
+
+            // CVC5
+            runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$cvc5Version:libcvc5jni-x64@dylib")
+        }
+
+        os.isMacOsX() && arch.isArm64() -> {
+            // Z3
+            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$z3Version:libz3-arm64@dylib")
+            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$z3Version:libz3java-arm64@dylib")
+
+            // CVC5
+            runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$cvc5Version:libcvc5jni-arm64@dylib")
+        }
+
         else -> error("Unsupported OS or architecture")
     }
 
