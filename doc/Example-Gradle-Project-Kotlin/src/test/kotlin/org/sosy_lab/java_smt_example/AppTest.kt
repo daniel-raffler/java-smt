@@ -80,38 +80,23 @@ class AppTest {
     @Parameter(0)
     lateinit var solver: Solvers
 
-    private lateinit var config: Configuration
-    private lateinit var logger: LogManager
-    private lateinit var notifier: ShutdownNotifier
-
-    private lateinit var context: SolverContext
-
-    @BeforeTest
-    fun init() {
-        config = Configuration.defaultConfiguration()
-        logger = BasicLogManager.create(config)
-        notifier = ShutdownNotifier.createDummy()
-        context = SolverContextFactory.createSolverContext(config, logger, notifier, solver)
-    }
-
-    /* We close our context after we are done with a solver to not waste memory. */
-    @AfterTest
-    fun closeSolver() {
-        context.close()
-    }
+    val config = Configuration.defaultConfiguration()
+    val logger = BasicLogManager.create(config)
+    val notifier = ShutdownNotifier.createDummy()
 
     @Test
     fun checkSudoku() {
         assumeTrue(isSupportedOperatingSystemAndArchitecture(solver))
         logger.log(Level.INFO, "Executing " + solver + "...")
+        
+        SolverContextFactory.createSolverContext(config, logger, notifier, solver).use {
+            val grid = readGridFromString(input)
+            val sudoku = Sudoku.BooleanBasedSudokuSolver(it)
+            val solution = sudoku.solve(grid)
 
-        val grid = readGridFromString(input)
-
-        val sudoku = Sudoku.BooleanBasedSudokuSolver(context)
-        val solution = sudoku.solve(grid)
-
-        assertNotNull(solution)
-        assertEquals(sudokuSolution, solutionToString(solution))
+            assertNotNull(solution)
+            assertEquals(sudokuSolution, solutionToString(solution))
+        }
     }
 
     private fun solutionToString(solution: Array<Array<Int?>?>): String {
@@ -191,17 +176,20 @@ class AppTest {
                 Solvers.BOOLECTOR, Solvers.CVC4 -> IS_LINUX && !IS_ARCH_ARM64
                 Solvers.YICES2 -> (IS_LINUX && !IS_ARCH_ARM64 && isSufficientVersionOfLibcxx("yices2java"))
                         || (IS_WINDOWS && !IS_ARCH_ARM64)
+
                 Solvers.CVC5 -> (IS_LINUX && isSufficientVersionOfLibcxx("cvc5jni"))
                         || IS_WINDOWS
                         || IS_MAC
+
                 Solvers.OPENSMT -> IS_LINUX && isSufficientVersionOfLibcxx("opensmtj")
                 Solvers.BITWUZLA -> (IS_LINUX && isSufficientVersionOfLibcxx("bitwuzlaj"))
                         || (IS_WINDOWS && !IS_ARCH_ARM64)
-                Solvers.MATHSAT5 -> (IS_LINUX && isSufficientVersionOfLibcxx("mathsat5j"))
-                        || (IS_WINDOWS && !IS_ARCH_ARM64)
+
+                Solvers.MATHSAT5 -> (IS_WINDOWS && !IS_ARCH_ARM64)
                 Solvers.Z3 -> (IS_LINUX && isSufficientVersionOfLibcxx("z3"))
                         || IS_WINDOWS
                         || IS_MAC
+
                 Solvers.Z3_WITH_INTERPOLATION -> IS_LINUX && !IS_ARCH_ARM64
             }
         }
