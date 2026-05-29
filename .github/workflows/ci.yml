@@ -12,7 +12,7 @@ on:
   push
 
 jobs:
-  linux:
+  ivy:
     name: Ivy Example Project
     strategy:
       fail-fast: false
