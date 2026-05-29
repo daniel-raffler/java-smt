@@ -348,7 +348,7 @@ SPDX-License-Identifier: Apache-2.0
             <activation>
                 <os>
                     <family>linux</family>
-                    <arch>arm64</arch>
+                    <arch>aarch64</arch>
                 </os>
             </activation>
             <dependencies>
