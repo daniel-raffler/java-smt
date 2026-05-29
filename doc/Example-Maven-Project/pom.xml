@@ -511,7 +511,7 @@ SPDX-License-Identifier: Apache-2.0
                                             from="^javasmt-solver-(?:bitwuzla|boolector|cvc4|cvc5|mathsat|opensmt|yices2|z3-legacy|z3)-(.*?)(?:-arm64|-x64)?\.(so|dll|dylib)$"
                                             to="\1.\2"/>
                                 </copy>
-                                <!--<delete dir="${project.build.directory}/temp-natives"/>-->
+                                <delete dir="${project.build.directory}/temp-natives"/>
                             </target>
                         </configuration>
                     </execution>
