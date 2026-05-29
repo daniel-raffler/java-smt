@@ -62,5 +62,5 @@ jobs:
       - name: Upload error log
         uses: actions/upload-artifact@v7
         with:
-          path: build/test-report/html/junit-noframes.html
+          path: doc/Example-Ivy-Project/build/test-report/html/junit-noframes.html
           archive: false
