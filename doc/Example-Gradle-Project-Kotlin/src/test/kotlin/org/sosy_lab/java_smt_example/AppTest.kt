@@ -88,7 +88,7 @@ class AppTest {
     fun checkSudoku() {
         assumeTrue(isSupportedOperatingSystemAndArchitecture(solver))
         logger.log(Level.INFO, "Executing " + solver + "...")
-        
+
         SolverContextFactory.createSolverContext(config, logger, notifier, solver).use {
             val grid = readGridFromString(input)
             val sudoku = Sudoku.BooleanBasedSudokuSolver(it)

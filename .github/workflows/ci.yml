@@ -169,7 +169,7 @@ jobs:
       - name: Show solver table
         run: |
           cd doc/Example-Gradle-Project-Kotlin
-          ./gradlew build
+          ./gradlew run
         env:
           LD_PRELOAD: /usr/lib/${{ matrix.os == 'ubuntu-24.04-arm' && 'aarch64-linux-gnu' || 'x86_64-linux-gnu' }}/libstdc++.so.6
 
