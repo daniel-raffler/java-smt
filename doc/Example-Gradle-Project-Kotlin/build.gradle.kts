@@ -79,7 +79,7 @@ dependencies {
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
-    // JUnit 4
+    // JUnit
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit6Version")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junit6Version")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:$junit6Version")
