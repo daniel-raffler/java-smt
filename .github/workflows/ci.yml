@@ -156,27 +156,27 @@ jobs:
             maven-shared-
           enableCrossOsArchive: true
 
-      - name: Install Gradle wrapper
-        run: |
-          cd doc/Example-Gradle-Project-Kotlin
-          gradle wrapper --gradle-version 9.5.1
+      - name: Install Gradle
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          gradle-version: '9.5.1'
 
       - name: Build Kotlin example project
         run: |
           cd doc/Example-Gradle-Project-Kotlin
-          ./gradlew build -x test
+          gradle build -x test
 
       - name: Show solver table
         run: |
           cd doc/Example-Gradle-Project-Kotlin
-          ./gradlew run
+          gradle run
         env:
           LD_PRELOAD: /usr/lib/${{ matrix.os == 'ubuntu-24.04-arm' && 'aarch64-linux-gnu' || 'x86_64-linux-gnu' }}/libstdc++.so.6
 
       - name: Run tests
         run: |
           cd doc/Example-Gradle-Project-Kotlin
-          ./gradlew test
+          gradle test
         env:
           LD_PRELOAD: /usr/lib/${{ matrix.os == 'ubuntu-24.04-arm' && 'aarch64-linux-gnu' || 'x86_64-linux-gnu' }}/libstdc++.so.6
 
