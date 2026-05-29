@@ -157,7 +157,7 @@ jobs:
       - name: Install Gradle wrapper
         run: |
           cd doc/Example-Gradle-Project-Kotlin
-          gradle wrapper --gradle-version latest
+          gradle wrapper --gradle-version 9.5.1
 
       - name: Build Kotlin example project
         run: |
