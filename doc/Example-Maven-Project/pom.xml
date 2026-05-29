@@ -516,6 +516,76 @@ SPDX-License-Identifier: Apache-2.0
                 </dependency>
             </dependencies>
         </profile>
+        <profile>
+            <id>x64-macosx</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <dependencies>
+                <!-- Z3 -->
+                <dependency>
+                    <groupId>org.sosy-lab</groupId>
+                    <artifactId>javasmt-solver-z3</artifactId>
+                    <version>${z3.version}</version>
+                    <type>dylib</type>
+                    <classifier>libz3-amd64</classifier>
+                </dependency>
+                <dependency>
+                    <groupId>org.sosy-lab</groupId>
+                    <artifactId>javasmt-solver-z3</artifactId>
+                    <version>${z3.version}</version>
+                    <type>dylib</type>
+                    <classifier>libz3java-amd64</classifier>
+                </dependency>
+
+                <!-- CVC5 -->
+                <dependency>
+                    <groupId>org.sosy-lab</groupId>
+                    <artifactId>javasmt-solver-cvc5</artifactId>
+                    <version>${cvc5.version}</version>
+                    <type>dylib</type>
+                    <classifier>libcvc5jni-amd64</classifier>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>arm64-macosx</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                    <arch>aarch64</arch>
+                </os>
+            </activation>
+            <dependencies>
+                <!-- Z3 -->
+                <dependency>
+                    <groupId>org.sosy-lab</groupId>
+                    <artifactId>javasmt-solver-z3</artifactId>
+                    <version>${z3.version}</version>
+                    <type>dylib</type>
+                    <classifier>libz3-arm64</classifier>
+                </dependency>
+                <dependency>
+                    <groupId>org.sosy-lab</groupId>
+                    <artifactId>javasmt-solver-z3</artifactId>
+                    <version>${z3.version}</version>
+                    <type>dylib</type>
+                    <classifier>libz3java-arm64</classifier>
+                </dependency>
+
+                <!-- CVC5 -->
+                <dependency>
+                    <groupId>org.sosy-lab</groupId>
+                    <artifactId>javasmt-solver-cvc5</artifactId>
+                    <version>${cvc5.version}</version>
+                    <type>dylib</type>
+                    <classifier>libcvc5jni-arm64</classifier>
+                </dependency>
+            </dependencies>
+        </profile>
     </profiles>
 
     <build>
