@@ -109,9 +109,14 @@ jobs:
       - name: Run tests
         run: |
           cd doc/Example-Maven-Project
-          mvn surefire-report:report
+          mvn test
         env:
           LD_PRELOAD: /usr/lib/${{ matrix.os == 'ubuntu-24.04-arm' && 'aarch64-linux-gnu' || 'x86_64-linux-gnu' }}/libstdc++.so.6
+
+      - name: Generate test report
+        run : |
+          cd doc/Example-Maven-Project
+          mvn surefire-report:report-only
 
       - name: Upload test report
         uses: actions/upload-artifact@v7
