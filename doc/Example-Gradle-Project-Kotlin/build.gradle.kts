@@ -177,7 +177,9 @@ dependencies {
 
         os.isWindows() && arch.isAmd64() -> {
             // Mathsat5
-            runtimeOnly("org.sosy-lab:javasmt-solver-mathsat:$mathsat5Version:libmathsat5j-x64@dll")
+            runtimeOnly("org.sosy-lab:javasmt-solver-mathsat:$mathsat5Version:mathsat5j-x64@dll")
+            runtimeOnly("org.sosy-lab:javasmt-solver-mathsat:$mathsat5Version:mathsat-x64@dll")
+            runtimeOnly("org.sosy-lab:javasmt-solver-mathsat:$mathsat5Version:gmp-x64@dll")
 
             // Z3
             runtimeOnly("org.sosy-lab:javasmt-solver-z3:$z3Version:libz3-x64@dll")
@@ -190,7 +192,7 @@ dependencies {
             runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$cvc5Version:libcvc5jni-x64@dll")
 
             // Yices2
-            runtimeOnly("org.sosy-lab:javasmt-solver-yices2:$yices2Version:libyices2java-x64@dll")
+            runtimeOnly("org.sosy-lab:javasmt-solver-yices2:$yices2Version:yices2java-x64@dll")
         }
 
         os.isWindows() && arch.isArm64() -> {
