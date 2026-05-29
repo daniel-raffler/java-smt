@@ -175,6 +175,33 @@ dependencies {
             runtimeOnly("org.sosy-lab:javasmt-solver-opensmt:$opensmtVersion:libopensmtj-arm64@so")
         }
 
+        os.isWindows() && arch.isAmd64() -> {
+            // Mathsat5
+            runtimeOnly("org.sosy-lab:javasmt-solver-mathsat:$mathsat5Version:libmathsat5j-x64@dll")
+
+            // Z3
+            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$z3Version:libz3-x64@dll")
+            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$z3Version:libz3java-x64@dll")
+
+            // Bitwuzla
+            runtimeOnly("org.sosy-lab:javasmt-solver-bitwuzla:$bitwuzlaVersion:libbitwuzlaj-x64@dll")
+
+            // CVC5
+            runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$cvc5Version:libcvc5jni-x64@dll")
+
+            // Yices2
+            runtimeOnly("org.sosy-lab:javasmt-solver-yices2:$yices2Version:libyices2java-x64@dll")
+        }
+
+        os.isWindows() && arch.isArm64() -> {
+            // Z3
+            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$z3Version:libz3-arm64@dll")
+            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$z3Version:libz3java-arm64@dll")
+
+            // CVC5
+            runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$cvc5Version:libcvc5jni-arm64@dll")
+        }
+
         os.isMacOsX() && arch.isAmd64() -> {
             println("x64-macosx")
             // Z3
