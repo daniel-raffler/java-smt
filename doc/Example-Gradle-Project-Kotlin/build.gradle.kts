@@ -73,7 +73,7 @@ repositories {
 }
 
 val os = DefaultNativePlatform.getCurrentOperatingSystem()
-val arch = DefaultNativePlatform.getCurrentArchitecture();
+val arch = DefaultNativePlatform.getCurrentArchitecture()
 
 dependencies {
     // Align versions of all Kotlin components
