@@ -77,6 +77,7 @@ dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter-api:$version.junit6")
   testImplementation("org.junit.jupiter:junit-jupiter-params:$version.junit6")
   testImplementation("org.junit.jupiter:junit-jupiter-engine:$version.junit6")
+  testRuntimeOnly("org.junit.platform:junit-platform-launcher:$version.junit6")
 
   // JavaSMT dependencies
   implementation("org.sosy-lab:java-smt:$version.javasmt")
@@ -152,10 +153,9 @@ dependencies {
 
 // Test with JUnit (see dependencies) and 1gig heap
 test {
-  useJUnit()
+  useJUnitPlatform()
   maxHeapSize = '1G'
 }
-
 
 def shorten(full) {
     def match = full =~ /(.*)(?:-x64|-arm64)\.(so|dll|dylib)$/
@@ -204,6 +204,6 @@ distZip.setDuplicatesStrategy(DuplicatesStrategy.INCLUDE)
 jar {
   manifest {
     attributes 'Main-Class': 'org.sosy_lab.java_smt_example.SolverOverviewTable'
-   // attributes 'Class-Path': configurations.javaSMTConfig.files.collect { it.getName() }.join(' ')
+    attributes 'Class-Path': configurations.javaSMTConfig.files.collect { it.getName() }.join(' ')
   }
 }
