@@ -32,7 +32,7 @@ def version = [
   'princess': '2025-11-17',
   'ostrich': '2.0',
   'yices2': '2.7.0-gdc5687ca',
-  'z3': '4.16.0',
+  'z3': '4.15.0',
   'z3legacy': '4.5.0-gd57a2a6dc',
 
   'junit6': '6.1.0'
