@@ -158,7 +158,15 @@ jobs:
       - name: Build Maven Web example project
         run: |
           cd doc/Example-Maven-Web-Project
-          mvn -DskipTests compile
+          mvn -DskipTests package
+
+      - name: Show solver table
+        run: |
+          cd doc/Example-Maven-Web-Project
+          sudo apt install tomcat10
+          sudo service tomcat10 start
+          sudo cp target/java-smt-web-example-2.0.war /var/lib/tomcat10/webapps/
+          curl http://localhost:8080/java-smt-web-example-2.0/SolverOverviewServlet
 
       #- name: Show solver table
       #  run: |
