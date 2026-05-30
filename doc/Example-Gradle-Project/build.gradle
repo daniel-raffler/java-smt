@@ -9,12 +9,8 @@
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 
 plugins {
-    id 'java'
-    id 'application'
-}
-
-application {
-    mainClass = 'org.sosy_lab.java_smt_example.SolverOverviewTable'
+  id 'java'
+  id 'application'
 }
 
 // Globally define versions used for our dependencies
@@ -45,24 +41,24 @@ repositories {
   // try to resolve by pom first
   mavenCentral {
     metadataSources {
-      mavenPom()
+    mavenPom()
     }
   }
   // try to get artifacts if no useful pom is found
   mavenCentral {
     metadataSources {
-      artifact()
+    artifact()
     }
   }
   // Ivy can be used as well
   ivy {
     url = "https://www.sosy-lab.org/ivy"
     patternLayout {
-      artifact "/[organisation]/[module]/[classifier]-[revision].[ext]"
-      // ivy "/[organisation]/[module]/ivy-[revision].xml"
+    artifact "/[organisation]/[module]/[classifier]-[revision].[ext]"
+    // ivy "/[organisation]/[module]/ivy-[revision].xml"
     }
     metadataSources {
-       artifact()
+     artifact()
     }
   }
 }
@@ -114,112 +110,107 @@ dependencies {
   // OpenSMT
   runtimeOnly("org.sosy-lab:javasmt-solver-opensmt:$version.opensmt@jar")
 
-  if(
-        os.isLinux() && arch.isAmd64()) {
-            // Mathsat5
-            runtimeOnly("org.sosy-lab:javasmt-solver-mathsat:$version.mathsat5:libmathsat5j-x64@so")
+  if(os.isLinux() && arch.isAmd64()) {
+    // Mathsat5
+    runtimeOnly("org.sosy-lab:javasmt-solver-mathsat:$version.mathsat5:libmathsat5j-x64@so")
 
-            // Z3
-            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3-x64@so")
-            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3java-x64@so")
+    // Z3
+    runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3-x64@so")
+    runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3java-x64@so")
 
-              // Z3 4.5
-              runtimeOnly("org.sosy-lab:javasmt-solver-z3-legacy:$version.z3legacy:libz3legacy-x64@so")
-              runtimeOnly("org.sosy-lab:javasmt-solver-z3-legacy:$version.z3legacy:libz3javalegacy-x64@so")
+    // Z3 4.5
+    runtimeOnly("org.sosy-lab:javasmt-solver-z3-legacy:$version.z3legacy:libz3legacy-x64@so")
+    runtimeOnly("org.sosy-lab:javasmt-solver-z3-legacy:$version.z3legacy:libz3javalegacy-x64@so")
 
-            // Bitwuzla
-            runtimeOnly("org.sosy-lab:javasmt-solver-bitwuzla:$version.bitwuzla:libbitwuzlaj-x64@so")
+    // Bitwuzla
+    runtimeOnly("org.sosy-lab:javasmt-solver-bitwuzla:$version.bitwuzla:libbitwuzlaj-x64@so")
 
-            // CVC4
-            runtimeOnly("org.sosy-lab:javasmt-solver-cvc4:$version.cvc4:libcvc4@so")
-            runtimeOnly("org.sosy-lab:javasmt-solver-cvc4:$version.cvc4:libcvc4jni@so")
-            runtimeOnly("org.sosy-lab:javasmt-solver-cvc4:$version.cvc4:libcvc4parser@so")
+    // CVC4
+    runtimeOnly("org.sosy-lab:javasmt-solver-cvc4:$version.cvc4:libcvc4@so")
+    runtimeOnly("org.sosy-lab:javasmt-solver-cvc4:$version.cvc4:libcvc4jni@so")
+    runtimeOnly("org.sosy-lab:javasmt-solver-cvc4:$version.cvc4:libcvc4parser@so")
 
-            // CVC5
-            runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$version.cvc5:libcvc5jni-x64@so")
+    // CVC5
+    runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$version.cvc5:libcvc5jni-x64@so")
 
-            // Boolector
-            runtimeOnly("org.sosy-lab:javasmt-solver-boolector:$version.boolector:libboolector@so")
-            runtimeOnly("org.sosy-lab:javasmt-solver-boolector:$version.boolector:libminisat@so")
-            runtimeOnly("org.sosy-lab:javasmt-solver-boolector:$version.boolector:libpicosat@so")
+    // Boolector
+    runtimeOnly("org.sosy-lab:javasmt-solver-boolector:$version.boolector:libboolector@so")
+    runtimeOnly("org.sosy-lab:javasmt-solver-boolector:$version.boolector:libminisat@so")
+    runtimeOnly("org.sosy-lab:javasmt-solver-boolector:$version.boolector:libpicosat@so")
 
-            // Yices2
-            runtimeOnly("org.sosy-lab:javasmt-solver-yices2:$version.yices2:libyices2java-x64@so")
+    // Yices2
+    runtimeOnly("org.sosy-lab:javasmt-solver-yices2:$version.yices2:libyices2java-x64@so")
 
-            // OpenSMT
-            runtimeOnly("org.sosy-lab:javasmt-solver-opensmt:$version.opensmt:libopensmtj-x64@so")
-        } else if (
+    // OpenSMT
+    runtimeOnly("org.sosy-lab:javasmt-solver-opensmt:$version.opensmt:libopensmtj-x64@so")
 
-        os.isLinux() && arch.isArm64()) {
-            // Mathsat5
-            runtimeOnly("org.sosy-lab:javasmt-solver-mathsat:$version.mathsat5:libmathsat5j-arm64@so")
+  } else if (os.isLinux() && arch.isArm64()) {
+    // Mathsat5
+    runtimeOnly("org.sosy-lab:javasmt-solver-mathsat:$version.mathsat5:libmathsat5j-arm64@so")
 
-            // Z3
-            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3-arm64@so")
-            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3java-arm64@so")
+    // Z3
+    runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3-arm64@so")
+    runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3java-arm64@so")
 
-            // Z3 4.5
-            runtimeOnly("org.sosy-lab:javasmt-solver-z3-legacy:$version.z3Legacy:libz3legacy-arm64@so")
-            runtimeOnly("org.sosy-lab:javasmt-solver-z3-legacy:$version.z3Legacy:libz3javalegacy-arm64@so")
+    // Z3 4.5
+    runtimeOnly("org.sosy-lab:javasmt-solver-z3-legacy:$version.z3Legacy:libz3legacy-arm64@so")
+    runtimeOnly("org.sosy-lab:javasmt-solver-z3-legacy:$version.z3Legacy:libz3javalegacy-arm64@so")
 
-            // Bitwuzla
-            runtimeOnly("org.sosy-lab:javasmt-solver-bitwuzla:$version.bitwuzla:libbitwuzlaj-arm64@so")
+    // Bitwuzla
+    runtimeOnly("org.sosy-lab:javasmt-solver-bitwuzla:$version.bitwuzla:libbitwuzlaj-arm64@so")
 
-            // CVC5
-            runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$version.cvc5:libcvc5jni-arm64@so")
+    // CVC5
+    runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$version.cvc5:libcvc5jni-arm64@so")
 
-            // OpenSMT
-            runtimeOnly("org.sosy-lab:javasmt-solver-opensmt:$version.opensmt:libopensmtj-arm64@so")
-        } else if(
+    // OpenSMT
+    runtimeOnly("org.sosy-lab:javasmt-solver-opensmt:$version.opensmt:libopensmtj-arm64@so")
 
-        os.isWindows() && arch.isAmd64()) {
-            // Mathsat5
-            runtimeOnly("org.sosy-lab:javasmt-solver-mathsat:$version.mathsat5:mathsat5j-x64@dll")
-            runtimeOnly("org.sosy-lab:javasmt-solver-mathsat:$version.mathsat5:mathsat-x64@dll")
-            runtimeOnly("org.sosy-lab:javasmt-solver-mathsat:$version.mathsat5:gmp-x64@dll")
+  } else if(os.isWindows() && arch.isAmd64()) {
+    // Mathsat5
+    runtimeOnly("org.sosy-lab:javasmt-solver-mathsat:$version.mathsat5:mathsat5j-x64@dll")
+    runtimeOnly("org.sosy-lab:javasmt-solver-mathsat:$version.mathsat5:mathsat-x64@dll")
+    runtimeOnly("org.sosy-lab:javasmt-solver-mathsat:$version.mathsat5:gmp-x64@dll")
 
-            // Z3
-            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3-x64@dll")
-            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3java-x64@dll")
+    // Z3
+    runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3-x64@dll")
+    runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3java-x64@dll")
 
-            // Bitwuzla
-            runtimeOnly("org.sosy-lab:javasmt-solver-bitwuzla:$version.bitwuzla:libbitwuzlaj-x64@dll")
+    // Bitwuzla
+    runtimeOnly("org.sosy-lab:javasmt-solver-bitwuzla:$version.bitwuzla:libbitwuzlaj-x64@dll")
 
-            // CVC5
-            runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$version.cvc5:libcvc5jni-x64@dll")
+    // CVC5
+    runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$version.cvc5:libcvc5jni-x64@dll")
 
-            // Yices2
-            runtimeOnly("org.sosy-lab:javasmt-solver-yices2:$version.yices2:yices2java-x64@dll")
-        } else if (
+    // Yices2
+    runtimeOnly("org.sosy-lab:javasmt-solver-yices2:$version.yices2:yices2java-x64@dll")
 
-        os.isWindows() && arch.isArm64()){
-            // Z3
-            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3-arm64@dll")
-            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3java-arm64@dll")
+  } else if (os.isWindows() && arch.isArm64()){
+    // Z3
+    runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3-arm64@dll")
+    runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3java-arm64@dll")
 
-            // CVC5
-            runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$version.cvc5:libcvc5jni-arm64@dll")
-        } else if(
+    // CVC5
+    runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$version.cvc5:libcvc5jni-arm64@dll")
 
-        os.isMacOsX() && arch.isAmd64()) {
-            // Z3
-            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3-x64@dylib")
-            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3java-x64@dylib")
+  } else if(os.isMacOsX() && arch.isAmd64()) {
+    // Z3
+    runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3-x64@dylib")
+    runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3java-x64@dylib")
 
-            // CVC5
-            runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$version.cvc5:libcvc5jni-x64@dylib")
-        }
-else if(
-        os.isMacOsX() && arch.isArm64()) {
-            // Z3
-            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3-arm64@dylib")
-            runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3java-arm64@dylib")
+    // CVC5
+    runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$version.cvc5:libcvc5jni-x64@dylib")
 
-            // CVC5
-            runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$version.cvc5:libcvc5jni-arm64@dylib")
-        }
-        else { throw new GradleException('Unsupported OS or architecture')}
+  } else if(os.isMacOsX() && arch.isArm64()) {
+    // Z3
+    runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3-arm64@dylib")
+    runtimeOnly("org.sosy-lab:javasmt-solver-z3:$version.z3:libz3java-arm64@dylib")
 
+    // CVC5
+    runtimeOnly("org.sosy-lab:javasmt-solver-cvc5:$version.cvc5:libcvc5jni-arm64@dylib")
+
+  } else {
+    throw new GradleException('Unsupported OS or architecture')
+  }
 
   // Tell implementation config to use the JavaSMT + dependencies from our dependencies folder
   implementation fileTree(dir: 'build/dependencies', include: '*.jar')
@@ -231,18 +222,23 @@ test {
   maxHeapSize = '1G'
 }
 
+// Define the main class for the application.
+application {
+  mainClass = 'org.sosy_lab.java_smt_example.SolverOverviewTable'
+}
+
 def shorten(full) {
-    def match = full =~ /(.*)(?:-x64|-arm64)\.(so|dll|dylib)$/
-    def clipped = full
-    if (match) {
-        clipped = match[0][1] + "." + match[0][2]
-    }
-    def match2 = clipped =~ /.*-(.*).(so|dll|dylib)$/
-    if (match2) {
-        return match2[0][1] + "." + match2[0][2]
-    } else {
-        return clipped
-    }
+  def match = full =~ /(.*)(?:-x64|-arm64)\.(so|dll|dylib)$/
+  def clipped = full
+  if (match) {
+    clipped = match[0][1] + "." + match[0][2]
+  }
+  def match2 = clipped =~ /.*-(.*).(so|dll|dylib)$/
+  if (match2) {
+    return match2[0][1] + "." + match2[0][2]
+  } else {
+    return clipped
+  }
 }
 
 // Copy and rename all JavaSMT dependencies
