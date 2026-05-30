@@ -227,6 +227,10 @@ application {
   mainClass = 'org.sosy_lab.java_smt_example.SolverOverviewTable'
 }
 
+// Compile to Java 17
+// JavaSMT requires at least Java 17, but a newer version could be used here
+java.sourceCompatibility = JavaVersion.VERSION_17
+
 def shorten(full) {
   def match = full =~ /(.*)(?:-x64|-arm64)\.(so|dll|dylib)$/
   def clipped = full
