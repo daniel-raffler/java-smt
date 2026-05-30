@@ -90,7 +90,7 @@ jobs:
         with:
           path: .m2/repository
           # We use a unique key for each run to ensure the cache is updated if needed,
-          # while restoring from the most recent "ivy-shared-" cache.
+          # while restoring from the most recent "maven-shared-" cache.
           key: maven-shared-${{ github.run_id }}
           restore-keys: |
             maven-shared-
@@ -151,7 +151,7 @@ jobs:
         with:
           path: .m2/repository
           # We use a unique key for each run to ensure the cache is updated if needed,
-          # while restoring from the most recent "ivy-shared-" cache.
+          # while restoring from the most recent "maven-shared-" cache.
           key: maven-shared-${{ github.run_id }}
           restore-keys: |
             maven-shared-
@@ -212,7 +212,7 @@ jobs:
         with:
           path: .m2/repository
           # We use a unique key for each run to ensure the cache is updated if needed,
-          # while restoring from the most recent "ivy-shared-" cache.
+          # while restoring from the most recent "maven-shared-" cache.
           key: maven-shared-${{ github.run_id }}
           restore-keys: |
             maven-shared-
