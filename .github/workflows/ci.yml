@@ -127,6 +127,65 @@ jobs:
           path: doc/Example-Maven-Project/target/reports/surefire.html
           archive: false
 
+  web:
+    name: Maven Web Example Project
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version: [ 21 ]
+        os: [ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v5
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: 'temurin'
+
+      - name: Shared Maven Cache
+        uses: actions/cache@v5
+        with:
+          path: .m2/repository
+          # We use a unique key for each run to ensure the cache is updated if needed,
+          # while restoring from the most recent "maven-shared-" cache.
+          key: maven-shared-${{ github.run_id }}
+          restore-keys: |
+            maven-shared-
+          enableCrossOsArchive: true
+
+      - name: Build Maven Web example project
+        run: |
+          cd doc/Example-Maven-Web-Project
+          mvn -DskipTests compile
+
+      #- name: Show solver table
+      #  run: |
+      #    cd doc/Example-Maven-Web-Project
+      #    mvn exec:exec
+      #  env:
+      #    LD_PRELOAD: /usr/lib/${{ matrix.os == 'ubuntu-24.04-arm' && 'aarch64-linux-gnu' || 'x86_64-linux-gnu' }}/libstdc++.so.6
+
+      - name: Run tests
+        run: |
+          cd doc/Example-Maven-Web-Project
+          mvn test
+        env:
+          LD_PRELOAD: /usr/lib/${{ matrix.os == 'ubuntu-24.04-arm' && 'aarch64-linux-gnu' || 'x86_64-linux-gnu' }}/libstdc++.so.6
+
+      - name: Generate test report
+        run : |
+          cd doc/Example-Maven-Web-Project
+          mvn surefire-report:report-only
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          path: doc/Example-Maven-Web-Project/target/reports/surefire.html
+          archive: false
+
   gradle:
     name: Gradle Example Project
     strategy:
