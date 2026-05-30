@@ -296,12 +296,3 @@ tasks.compileKotlin {
 tasks.clean {
     dependsOn("cleanDownloadedDependencies")
 }
-
-// Set duplicate strategies to remove a warning
-tasks.withType<Tar> {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-tasks.withType<Zip> {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
