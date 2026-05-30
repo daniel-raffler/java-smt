@@ -160,21 +160,6 @@ jobs:
           cd doc/Example-Maven-Web-Project
           mvn -DskipTests package
 
-      - name: Show solver table
-        run: |
-          cd doc/Example-Maven-Web-Project
-          sudo apt install tomcat10
-          sudo service tomcat10 start
-          sudo cp target/java-smt-web-example-2.0.war /var/lib/tomcat10/webapps/
-          curl http://127.0.0.1:8080/java-smt-web-example-2.0/SolverOverviewServlet
-
-      #- name: Show solver table
-      #  run: |
-      #    cd doc/Example-Maven-Web-Project
-      #    mvn exec:exec
-      #  env:
-      #    LD_PRELOAD: /usr/lib/${{ matrix.os == 'ubuntu-24.04-arm' && 'aarch64-linux-gnu' || 'x86_64-linux-gnu' }}/libstdc++.so.6
-
       - name: Run tests
         run: |
           cd doc/Example-Maven-Web-Project
