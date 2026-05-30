@@ -19,15 +19,6 @@ plugins {
     application
 }
 
-// Compile to Java 17
-// JavaSMT requires at least Java 17, but a newer version could be used here
-kotlin {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
-    }
-}
-java.sourceCompatibility = JavaVersion.VERSION_17
-
 // Globally define versions used for our dependencies
 val javasmtVersion = "6.0.0-148-gba08f432a"
 val javasmtYices2Version = "6.0.0-141-g04134287c"
@@ -228,7 +219,7 @@ dependencies {
     implementation(fileTree("dir" to "build/dependencies", "include" to "*.jar"))
 }
 
-// Not really used in the current example, just here for completeness sake
+// Configure tests
 testing {
     suites {
         // Configure the built-in test suite
@@ -243,6 +234,15 @@ testing {
 application {
     mainClass.set("org.sosy_lab.java_smt_example.JavaSMTKotlinExampleKt")
 }
+
+// Compile to Java 17
+// JavaSMT requires at least Java 17, but a newer version could be used here
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
+    }
+}
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 // Use a config to identify JavaSMT components
 configurations {
