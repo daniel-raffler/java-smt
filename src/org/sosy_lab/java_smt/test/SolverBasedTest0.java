@@ -250,7 +250,7 @@ public abstract class SolverBasedTest0 {
   private void initSolverWith(Configuration pConfiguration) throws InvalidConfigurationException {
     assume()
         .withMessage("Solver %s not supported on this platform", solverToUse())
-        .that(Solvers.available().contains(solverToUse()))
+        .that(Solvers.bundled().contains(solverToUse()))
         .isTrue();
 
     config = pConfiguration;
